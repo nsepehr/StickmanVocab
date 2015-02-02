@@ -6,6 +6,8 @@ require_once 'login.php';
 // Formt variables
 $firstName = $lastName = $email = $DOB = $terms = $nationality = "";
 $tableName = 'smvtestusers';
+$gotoUrl   = '../pages/guide.html';
+#$gotoUrl   = 'http://www.stickmanvocab.com/pages/guide.html';
 
 if (isset($_POST['First-Name'])) $firstName = sanitizeString($_POST['First-Name']);
 if (isset($_POST['Last-Name'])) $lastName = sanitizeString($_POST['Last-Name']);
@@ -16,6 +18,9 @@ if (isset($_POST['DOB'])) $DOB = sanitizeString($_POST['DOB']);
 $nationality = 'world';
 if (isset($_POST['Terms'])) $terms = sanitizeString($_POST['Terms']);
 
+////////////////////////////////////////////////////
+//////////// MAIN //////////////////
+////////////////////////////////////////////////////
 // Validate the required fields
 validate_fields($firstName, $lastName, $email, $DOB, $terms);
 
@@ -35,10 +40,28 @@ echo "Successfully inserted record<br>";
 // Close the connection
 mysql_close($db_server);
 
+// Go to the next page
+go_next($gotoUrl);
+
+
 //---------------------------------------------------//
 //------------- functions ---------------------------//
 //---------------------------------------------------//
 
+//---------------------------------------------------//
+// After a successful data insertion, go to next page 
+//---------------------------------------------------//
+function go_next($url) 
+{
+    //clear out the output buffer
+    while (ob_get_status()) 
+    {
+        ob_end_clean();
+    }
+    
+    // no redirect
+    header( "Location: $url");
+}
 //---------------------------------------------------//
 // Add the user who filled the form to the MySQL database table
 //---------------------------------------------------//
