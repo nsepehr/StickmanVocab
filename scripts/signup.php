@@ -1,7 +1,8 @@
 <?php //signup.php for handling the php form
 
 // This is where the login information exists for the smv_db instance
-require_once 'login.php'; 
+//require_once 'login.php'; 
+require_once 'login_dev.php'; 
 
 // Formt variables
 $firstName = $lastName = $email = $DOB = $terms = $nationality = "";
