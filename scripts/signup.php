@@ -7,7 +7,7 @@ require_once 'login_dev.php';
 // Formt variables
 $firstName = $lastName = $email = $DOB = $terms = $nationality = "";
 $tableName = 'smvtestusers';
-$gotoUrl   = '../pages/guide.html';
+$gotoUrl   = '/#/guide.html';
 #$gotoUrl   = 'http://www.stickmanvocab.com/pages/guide.html';
 
 if (isset($_POST['First-Name'])) $firstName = sanitizeString($_POST['First-Name']);
