@@ -1,11 +1,13 @@
 <?php // This script will return the URL of the video index it was asked
 
-$index = $_POST('video-index'); 
+$index = $_POST['video-index']; 
 if (!isset($index)) {
 	// If there was no POST request. die
+	echo "There must be a POST call"; 
 	die();
 }
 
+//echo "my index is:" . $index; 
 // This is where the login information exists for the smv_db instance
 require_once 'login_dev.php'; 
 
@@ -30,16 +32,20 @@ exit(0);
 //---------------------------------------------------//
 function grab_video_url($db, $table, $index) 
 {
-    $query = "SELECT * FROM `$table` WHERE `ID` = $index";
-    $result = mysql_query($query); 
+    $query = "SELECT * FROM `$db`.`$table` WHERE `ID`=$index";
+    $result = mysql_query($query);
     if (!$result) mysql_fatal_error("Unable to grab record: ");
     // There should be only one result returned
+    //echo "my result is: " . $result;
     $rows = mysql_num_rows($result);
+    //echo "my # of rows: " . $rows; 
     if (count($rows) > 1) {
         echo "Uexpected num of rows"; 
         exit(1); 
     }
-    return $result[0]; 
+    $rtResult = mysql_result($result, 0, 'URL'); 
+    //echo "rtResult is $rtResult"; 
+    return $rtResult; 
 }
 //---------------------------------------------------//
 // Test to see if we can conenct to the host
