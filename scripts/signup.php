@@ -9,10 +9,8 @@ require_once 'Connect_MySQL.php';
 // Form variables
 $tableName  = 'smvtestusers';
 $gotoUrl    = '/#/guide.html';
-$fields     = array('First-Name', 'Last-Name', 'Email', 'DOB');
+$fields     = array('firstName', 'lastName', 'email', 'DOB', 'nationality');
 
-// Delete this when HTML is fixed
-$nationality = 'world';
 
 // Initialize the connection class
 $connect = new ConnectMySQL($db_userName, $db_password, $db_host, $db_database);
@@ -70,7 +68,7 @@ function addUserToTable($connect, $fields, $table)
     $lastName  = $connect->sanitizeString($_POST[$fields[1]]);
     $email     = $connect->sanitizeString($_POST[$fields[2]]);
     $DOB       = $connect->sanitizeString($_POST[$fields[3]]);
-    $origin    = 'world';
+    $origin    = $connect->sanitizeString($_POST[$fields[4]]);
 
     // Built the query for inserting the user data
     $query = "INSERT INTO `$table` (`ID`, `First Name`, `Last Name`, `DOB`, `Email`, `Nationality`) 
