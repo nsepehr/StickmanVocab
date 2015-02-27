@@ -8,56 +8,33 @@ require_once 'Connect_MySQL.php';
 
 // Form variables
 $tableName  = 'smvtestusers';
-$gotoUrl    = '/#/guide.html';
 $fields     = array('firstName', 'lastName', 'email', 'DOB', 'nationality');
-
-
-// Initialize the connection class
-$connect = new ConnectMySQL($db_userName, $db_password, $db_host, $db_database);
 
 
 ////////////////////////////////////////////////////
 //////////// MAIN //////////////////
 ////////////////////////////////////////////////////
+// Initialize the connection class
+$connect = new ConnectMySQL($db_userName, $db_password, $db_host, $db_database);
+
 // Validate the required fields
 $connect->validateFields($_POST, $fields);
-
-//nima debug
-// echo "All fields have been entered<br>"; 
-// echo "First name: $firstName <br>Last name: $lastName<br>Email: $email<br>DOB: $DOB<br>Terms: ";
-// sleep(3);
 
 // Test connections to DB
 $connect->connect();
 
 // Add user using MySQL query
 addUserToTable($connect, $fields, $tableName);
+
 // Succesful :)
 echo "Successfully inserted record";
 exit(0);
-
-// Go to the next page
-// go_next($gotoUrl);
 
 
 //---------------------------------------------------//
 //------------- functions ---------------------------//
 //---------------------------------------------------//
 
-//---------------------------------------------------//
-// After a successful data insertion, go to next page 
-//---------------------------------------------------//
-function go_next($url) 
-{
-    //clear out the output buffer
-    while (ob_get_status()) 
-    {
-        ob_end_clean();
-    }
-    
-    // no redirect
-    header( "Location: $url");
-}
 //---------------------------------------------------//
 // Add the user who filled the form to the MySQL database table
 //---------------------------------------------------//

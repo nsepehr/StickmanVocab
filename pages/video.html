@@ -1,5 +1,6 @@
 <script>
 
+/*
 angular.element(document).ready(function() {
 	var index = 1; 
 	var total = 10;
@@ -46,7 +47,7 @@ angular.element(document).ready(function() {
 		});
 	});
 }); 
-
+*/ 
 </script>
 
 <div ng-controller="windowCtrl" class="full-height">
@@ -61,30 +62,34 @@ angular.element(document).ready(function() {
 				</div>
 				<ul class='nav navbar-nav navbar-right'>
 					<li><a class="orange" ui-sref="guide">Back</a></li>
-					<li><a class="orange" ui-sref="quiz">Next</a></li>
 				</ul>
 			</div>
 		</div>
 	</nav>
 
 	<!-- Content -->
-	<div class="video text-center container">
+	<div class="video text-center container" ng-controller="VideoURLController" ng-init="playVideo()">
 		<div class="row">
 			<div class="col-sm-8 col-sm-offset-2">
 				<div>
-					<h4 class="text-left" id="Question-heading">Question 1 out of 10</h4>
+					<h4 class="text-left">Question {{videoIndex}} out of {{total}}</h4>
+				</div>
+				<div>
+					<h3 class="text-left">{{videoTitle}}</h3>
 				</div>
 				<div>
 					<video controls id="video-id">
-						<source src="videos/01-exigent.mp4" type="video/mp4" id="web-vid-src">
+						<source src="" type="video/mp4" id="web-vid-src">
+						<!-- We may want to think about different encodings later
 						<source src="videos/01-exigent.ogg" type="video/ogg" id="mobile-vid-src">
+						-->
 						Your browser does not support the video tag.
 					</video> 
 				</div>
 				<div>
 					<ul class="list-inline">
-						<li><a href=""><i class="pull-left fa fa-3x fa-step-backward" id="backward-btn"></i></a></li>
-						<li><a href=""><i class="pull-right fa fa-3x fa-step-forward" id="forward-btn"></i></a></li>
+						<li><a href=""><i class="pull-left fa fa-3x fa-step-backward" id="backward-btn" ng-click="changeVideo('prev')"></i></a></li>
+						<li><a href=""><i class="pull-right fa fa-3x fa-step-forward" id="forward-btn"  ng-click="changeVideo('next')"></i></a></li>
 					</ul>
 				</div>
 			</div>

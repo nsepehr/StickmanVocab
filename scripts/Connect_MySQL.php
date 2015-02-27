@@ -64,7 +64,11 @@ class ConnectMySQL
 
     function getResult() {
     	// Returns the result object
-    	return $this->result;
+        $result = $this->result->fetch_assoc();
+        if (count($result) < 1){
+            $this->fatalError("Empty result returned.");
+        }
+    	return $result;
     }
 
     //---------------------------------------------------//
