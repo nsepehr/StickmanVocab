@@ -37,6 +37,8 @@ class ConnectMySQL
     	if (!$this->connection->connect_errno) {
     		$this->closeConnection();
     	}
+        // http response code for internal server error
+        http_response_code(500);
     	die();
     }
 
@@ -48,8 +50,8 @@ class ConnectMySQL
     }
 
     function query($query) {
-    	$this->result = $this->connection->query($query); 
-    	if (!$this->result) {
+    	$this->result = $this->connection->query($query);
+    	if (!$this->result or $this->connection->error) {
     		$this->fatalError("Query failed: " . $this->connection->error);
     	}
     }
