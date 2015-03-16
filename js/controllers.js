@@ -53,65 +53,58 @@ Not sure if it's a good idea to keep all of the site controllers in one file,
 
 	});
 
-	app.controller('VideoURLController', ['$scope', '$http', function($scope, $http) {
+	app.controller('VideoURLController', ['$scope', '$http', '$state', function($scope, $http, $state) {
 		// ID tags ... May not be the best approach to manipulate the DOM elements directly
 		//		ng-src from angular has issues in some browsers. Reading online, seems like there's no good solution
 		var videoID = "video-id";
 		var srcWebID = "web-vid-src";
 
 		// This will handle the grabbing the URL for the videos
-		$scope.total = 10;
+		$scope.total;
 		$scope.videoIndex = 1;
+		$scope.videoData;
 		$scope.videoTitle;
 		$scope.videoURL;
+
+		$scope.getVideoData = function(){
+			$http({
+				method: 'GET',
+				url: '../scripts/video_data.php',
+				headers: {'Content-Type': contentType}
+			}).
+			success(function(data,status){
+				console.log('In getVideoData(). My data is: %o', data);
+				$scope.videoData = data;
+				$scope.total = $scope.videoData.length;
+				$scope.playVideo();
+			}).
+			error(function(data,status){
+				alert('Unable to retrieve video. Please try again!');
+			});
+		}
 
 		$scope.changeVideo = function(state){
 			if (state == 'next' && $scope.videoIndex < $scope.total) {
 				$scope.videoIndex++;
 			} else if (state == 'prev' && $scope.videoIndex > 1) {
 				$scope.videoIndex--;
+			} else if (state == 'next' && $scope.videoIndex == $scope.total) {
+				$state.go('thanks');
 			}
 			$scope.playVideo();
 		}
 
 		$scope.playVideo = function(){
-			$http({
-				method: 'POST',
-				url: '../scripts/video_url.php',
-				data: $.param({
-					'video-index': $scope.videoIndex
-				}),
-				headers: {'Content-Type': contentType}
-			}).
-			success(function(data,status){
-				console.log('My data is: %o', data);
-				angular.element('#'+videoID).get(0).pause();
-				angular.element('#'+srcWebID).attr("src", data.videoURL); 
-				angular.element('#'+videoID).get(0).load();
-				angular.element('#'+videoID).get(0).play();
-				//$scope.videoURL = $sce.trustAsResourceUrl(data.videoURL);
-				$scope.videoURL = data.videoURL;
-				$scope.videoTitle = data.videoTitle;
-			}).
-			error(function(data,status){
-				alert('Unable to retrieve video. Please try again!');
-			});
+			thisVideo = $scope.videoData[$scope.videoIndex-1];
+			console.log('In playVideo(). My data is: %o', thisVideo);
+			angular.element('#'+videoID).get(0).pause();
+			angular.element('#'+srcWebID).attr("src", thisVideo.URL); 
+			angular.element('#'+videoID).get(0).load();
+			angular.element('#'+videoID).get(0).play();
+			$scope.videoTitle = thisVideo.Name;
 		};
 
 	}]);
-
-/* Couldn't get this to work
-	app.directive('video', function() {
-    	return {
-      		restrict: 'E',
-      		link: function(scope, element) {
-        		scope.$on('$destroy', function() {
-          			element.prop('src', '');
-        		});
-      		}
-    	};
-    });
-*/
 
 
 })();

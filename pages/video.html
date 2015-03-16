@@ -1,54 +1,3 @@
-<script>
-
-/*
-angular.element(document).ready(function() {
-	var index = 1; 
-	var total = 10;
-	var videoID = "video-id";
-	var srcWebID = "web-vid-src";
-
-	angular.element.post("../scripts/video_url.php", 
-	{
-		"video-index": index
-	}, 
-	function(data,status) {
-		console.log("The status is: " + status + "\ndata is: " + data); 
-	});
-	
-	angular.element("#forward-btn").click(function() {
-		index++;
-		angular.element("#Question-heading").text("Question " + index + " out of " + total); 
-		angular.element.post("../scripts/video_url.php", 
-		{
-			"video-index": index
-		}, 
-		function(data,status) {
-			console.log("The status is: " + status + "\ndata is: " + data);
-			angular.element('#'+videoID).get(0).pause();
-			angular.element('#'+srcWebID).attr("src", data); 
-			angular.element('#'+videoID).get(0).load();
-			angular.element('#'+videoID).get(0).play();
-		});
-	}); 
-	
-	angular.element("#backward-btn").click(function() {
-		index--; 
-		angular.element("#Question-heading").text("Question " + index + " out of " + total); 
-		angular.element.post("../scripts/video_url.php", 
-		{
-			"video-index": index
-		}, 
-		function(data,status) {
-			console.log("The status is: " + status + "\ndata is: " + data);
-			angular.element('#'+videoID).get(0).pause();
-			angular.element('#'+srcWebID).attr("src", data); 
-			angular.element('#'+videoID).get(0).load();
-			angular.element('#'+videoID).get(0).play();
-		});
-	});
-}); 
-*/ 
-</script>
 
 <div ng-controller="windowCtrl" class="full-height">
 	<!-- Navigation -->
@@ -68,7 +17,7 @@ angular.element(document).ready(function() {
 	</nav>
 
 	<!-- Content -->
-	<div class="video text-center container" ng-controller="VideoURLController" ng-init="playVideo()">
+	<div class="video text-center container" ng-controller="VideoURLController" ng-init="getVideoData()">
 		<div class="row">
 			<div class="col-sm-8 col-sm-offset-2">
 				<div>

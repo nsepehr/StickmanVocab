@@ -73,6 +73,19 @@ class ConnectMySQL
     	return $result;
     }
 
+    function getResultAll() {
+        // Returns the result object
+        // fetch_all requires mysqlnd installed $result = $this->result->fetch_all();
+        $result = array();
+        while($row = $this->result->fetch_assoc()){
+            $result[] = $row;
+        }
+        if (count($result) < 1){
+            $this->fatalError("Empty result returned.");
+        }
+        return $result;
+    }
+
     //---------------------------------------------------//
 	// Below functions will sanitizie the form entries so that hackers
 	// don't introduce tags in order to attempt to compromize your data
