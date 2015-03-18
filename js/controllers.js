@@ -101,9 +101,28 @@ Not sure if it's a good idea to keep all of the site controllers in one file,
 			angular.element('#'+srcWebID).attr("src", thisVideo.URL); 
 			angular.element('#'+videoID).get(0).load();
 			angular.element('#'+videoID).get(0).play();
-			$scope.videoTitle = thisVideo.Name;
+			$scope.videoTitle = thisVideo.NAME;
 		};
 
+	}]);
+
+	app.controller('VideosList', ['$scope', '$http', function($scope, $http) {
+		$scope.videoData;
+
+		$scope.getVideos = function(){
+			$http({
+				method: 'GET',
+				url: '../scripts/video_data.php',
+				headers: {'Content-Type': contentType}
+			}).
+			success(function(data,status){
+				console.log('In getVideos(). My data is: %o', data);
+				$scope.videoData = data;
+			}).
+			error(function(data,status){
+				console.log('Unable to retrieve video. Please try again!');
+			});
+		}
 	}]);
 
 
