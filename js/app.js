@@ -1,7 +1,14 @@
-var site = angular.module('site', ['ui.router', 'site.controllers']);
+var site = angular.module('site', ['ui.router','LocalStorageModule', 'site.controllers']);
 
 // configure our routes
-site.config(function($stateProvider, $urlRouterProvider) {
+site.config(['$stateProvider', '$urlRouterProvider', 'localStorageServiceProvider', function($stateProvider, $urlRouterProvider, localStorageServiceProvider) {
+	// Local storage and cookie
+	localStorageServiceProvider
+	.setPrefix('site') // prefixes to any key
+	.setStorageCookie('360', '/') // In case of fallback set cookie on top domain & expiration of a year
+	.setStorageCookieDomain('') // will need to update once launched the product
+
+
 	// Fallback State
 	$urlRouterProvider.otherwise('/');
 
@@ -41,4 +48,4 @@ site.config(function($stateProvider, $urlRouterProvider) {
 			url: "/thanks",
 			templateUrl: "pages/thanks.html"
 		})
-	});
+}]);

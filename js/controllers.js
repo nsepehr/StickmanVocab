@@ -26,6 +26,17 @@ Not sure if it's a good idea to keep all of the site controllers in one file,
 		$scope.load();
 	}]);
 
+	// Used for the top level controller. Mainly cookie & localStorage
+	app.controller('MainController', ['localStorageService', '$scope', function(localStorageService, $scope){
+		if ($scope.userName = localStorageService.get('Name')) {
+			console.log('Local storage already existed');
+		} else if (localStorageService.set('Name', 'Nima')) {
+			console.log('Local storage Successfully inserted');
+		} else {
+			console.log('Unable to set local storage');
+		}
+	}]);
+
 	app.controller('SignupFormController', function($scope, $http) {
 		// This hash will contain the form information
 		this.formData = {};
