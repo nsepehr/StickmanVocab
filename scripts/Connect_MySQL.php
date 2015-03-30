@@ -29,15 +29,15 @@ class ConnectMySQL
     	if (!$this->debug) {
     		return;
     	}
-    	echo($msg);
+    	echo $msg;
     }
 
     function fatalError($msg) {
-    	$this->myEcho($msg);
     	if (!$this->connection->connect_errno) {
     		$this->closeConnection();
     	}
         // http response code for internal server error
+        $this->myEcho($msg);
         http_response_code(500);
     	die();
     }
