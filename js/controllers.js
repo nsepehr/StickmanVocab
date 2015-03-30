@@ -106,8 +106,10 @@ Not sure if it's a good idea to keep all of the site controllers in one file,
 
 	}]);
 
-	app.controller('VideosList', ['$scope', '$http', function($scope, $http) {
+	app.controller('FeedbackController', ['$scope', '$http', function($scope, $http) {
 		$scope.videoData;
+		$scope.textArea;
+		$scope.submitBtn;
 
 		$scope.getVideos = function(){
 			$http({
@@ -123,6 +125,26 @@ Not sure if it's a good idea to keep all of the site controllers in one file,
 				console.log('Unable to retrieve video. Please try again!');
 			});
 		}
+
+		this.submitForm = function(){
+			$http({
+				method: 'POST',
+				url: '../scripts/send_feedback.php',
+				data: $.param({
+					'FeedbackText': $scope.textArea
+				}),
+				headers: {'Content-Type': contentType}
+			}).
+			success(function(data,status){
+				console.log('Successfully sent feedback');
+				//this.submitBtn.disabled = true;
+			}).
+			error(function(data,status){
+				console.log('Unable to send feedback: ' + data);
+			});
+		}
+
+
 	}]);
 
 
