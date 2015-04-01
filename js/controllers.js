@@ -41,7 +41,8 @@ Not sure if it's a good idea to keep all of the site controllers in one file,
 		this.education = ['None' ,'High School Diploma', 'Bachelor Degree', 'Higher Education'];
 
 		this.submitForm = function(){
-			var name = this.formData.firstName;
+			var name  = this.formData.firstName;
+			var email = this.formData.email;
 			$http({
 				method: 'POST',
 				url: '../scripts/signup.php', 
@@ -58,7 +59,7 @@ Not sure if it's a good idea to keep all of the site controllers in one file,
 			}).
 			success(function(data,status){
 				// alert('Successfully inserted ');
-				if (localStorageService.set('Name', name)) {
+				if (localStorageService.set('Name', name) && localStorageService.set('Email', email)) {
 					console.log('Local storage Successfully inserted for name: ' + name);
 				} else {
 					console.log('Unable to set local storage');
@@ -125,10 +126,17 @@ Not sure if it's a good idea to keep all of the site controllers in one file,
 
 	}]);
 
-	app.controller('FeedbackController', ['$scope', '$http', function($scope, $http) {
+	app.controller('FeedbackController', ['$scope', '$http', 'localStorageService', function($scope, $http, localStorageService) {
 		$scope.videoData;
-		$scope.textArea;
-		$scope.submitBtn;
+		this.textArea;
+		var submitBtn = "submitBtn";
+
+		if ($scope.userName = localStorageService.get('Email')) {
+			console.log('Got the local storage for feedback');
+		} else {
+			console.log('Error... no localStorage');
+			$scope.userName = 'Unknown';
+		}
 
 		$scope.getVideos = function(){
 			$http({
@@ -146,17 +154,20 @@ Not sure if it's a good idea to keep all of the site controllers in one file,
 		}
 
 		this.submitForm = function(){
+			console.log("My text is: " + this.textArea);
 			$http({
 				method: 'POST',
-				url: '../scripts/send_feedback.php',
+				url: '../scripts/feedback.php',
 				data: $.param({
-					'FeedbackText': $scope.textArea
+					'user'        : $scope.userName,
+					'feedbackText': this.textArea
 				}),
 				headers: {'Content-Type': contentType}
 			}).
 			success(function(data,status){
 				console.log('Successfully sent feedback');
-				//this.submitBtn.disabled = true;
+				angular.element('#'+submitBtn).attr("disabled", true);
+				angular.element('#'+submitBtn).attr("value", "Thank You");
 			}).
 			error(function(data,status){
 				console.log('Unable to send feedback: ' + data);
