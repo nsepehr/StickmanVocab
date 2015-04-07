@@ -24,10 +24,11 @@ $connect->validateFields($_POST, $fields);
 $connect->connect();
 
 // Add user using MySQL query
-addUserToTable($connect, $fields, $tableName);
+addFeeback($connect, $fields, $tableName);
 
 // Succesful :)
 echo "Successfully inserted record";
+// print_r($_POST['knownWords']);
 exit(0);
 
 
@@ -38,7 +39,7 @@ exit(0);
 //---------------------------------------------------//
 // Add the user who filled the form to the MySQL database table
 //---------------------------------------------------//
-function addUserToTable($connect, $fields, $table)
+function addFeeback($connect, $fields, $table)
 {
     // Sanitize strings to prevent hacks
     $user     = $connect->sanitizeString($_POST[$fields[0]]);
