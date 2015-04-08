@@ -185,6 +185,7 @@ Not sure if it's a good idea to keep all of the site controllers in one file,
 				method: 'POST',
 				url: '../scripts/knownvideos.php',
 				data: $.param({
+					'user'        : $scope.userName,
 					'knownWords'  : $scope.videos.checked
 				}),
 				headers: {'Content-Type': contentType}

@@ -43,13 +43,13 @@ function addKnownWords($connect, $fields, $table)
 {
     // Sanitize strings to prevent hacks
     $user     = $connect->sanitizeString($_POST[$fields[0]]);
-    $words    = $connect->sanitizeString($_POST[$fields[1]]);
+    $words    = $_POST[$fields[1]];
 
     // Loop through the array and create a sring of the known videos
     // The delimiter is /
     $known = '';
     foreach ($words as $key) {
-    	$known = $known . '/';
+    	$known .= $key . '/';
     }
 
     // Built the query for inserting the user data
