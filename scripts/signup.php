@@ -8,7 +8,7 @@ require_once 'Connect_MySQL.php';
 
 // Form variables
 $tableName  = 'smvtestusers';
-$fields     = array('firstName', 'lastName', 'email', 'DOB', 'nationality', 'education', 'age');
+$fields     = array('firstName', 'lastName', 'email', 'nationality', 'education', 'age');
 
 
 ////////////////////////////////////////////////////
@@ -44,14 +44,13 @@ function addUserToTable($connect, $fields, $table)
     $firstName = $connect->sanitizeString($_POST[$fields[0]]);
     $lastName  = $connect->sanitizeString($_POST[$fields[1]]);
     $email     = $connect->sanitizeString($_POST[$fields[2]]);
-    $DOB       = $connect->sanitizeString($_POST[$fields[3]]);
-    $origin    = $connect->sanitizeString($_POST[$fields[4]]);
-    $education = $connect->sanitizeString($_POST[$fields[5]]);
-    $age       = $connect->sanitizeString($_POST[$fields[6]]);
+    $origin    = $connect->sanitizeString($_POST[$fields[3]]);
+    $education = $connect->sanitizeString($_POST[$fields[4]]);
+    $age       = $connect->sanitizeString($_POST[$fields[5]]);
 
     // Built the query for inserting the user data
-    $query = "INSERT INTO `$table` (`ID`, `First Name`, `Last Name`, `DOB`, `Email`, `Nationality`, `Education`, `Age`) 
-            VALUES (NULL, '$firstName', '$lastName', '$DOB', '$email', '$origin', '$education', '$age')";
+    $query = "INSERT INTO `$table` (`ID`, `First Name`, `Last Name`, `Email`, `Nationality`, `Education`, `Age`) 
+            VALUES (NULL, '$firstName', '$lastName', '$email', '$origin', '$education', '$age')";
     $connect->query($query);
 }
 

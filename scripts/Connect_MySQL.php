@@ -33,8 +33,8 @@ class ConnectMySQL
     }
 
     function fatalError($msg) {
-    	if (!$this->connection->connect_errno) {
-    		$this->closeConnection();
+    	if ($this->connection) {
+    		$this->connection->close();
     	}
         // http response code for internal server error
         $this->myEcho($msg);

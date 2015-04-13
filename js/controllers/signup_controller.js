@@ -9,7 +9,12 @@
 	app.controller('SignupFormController', ['$scope', '$http', '$state', 'localStorageService', function($scope, $http, $state, localStorageService) {
 		// This hash will contain the form information
 		this.formData = {};
-		this.education = ['None' ,'High School Diploma', 'Bachelor Degree', 'Higher Education'];
+		$scope.educationList = [
+			{'level': 'None'} ,
+			{'level': 'High School Diploma'}, 
+			{'level': 'Bachelor Degree'},
+			{'level': 'Higher Education'}
+		];
 
 		this.submitForm = function(){
 			var name  = this.formData.firstName;
@@ -20,10 +25,9 @@
 				data: $.param({
 					'firstName': this.formData.firstName,
 					'lastName' : this.formData.lastName,
-					'DOB'      : this.formData.DOB,
 					'email'    : this.formData.email,
 					'nationality' : this.formData.nationality,
-					'education': "Works",
+					'education': this.formData.education.level,
 					'age'      : this.formData.age
 				}),
 				headers: {'Content-Type': contentType}
@@ -34,8 +38,9 @@
 					console.log('Local storage Successfully inserted for name: ' + name);
 				} else {
 					console.log('Unable to set local storage');
-				}	
-				$state.go('guide');
+				}
+				alert('Successfully inserted data ' + status + '  Data is: ' + data)
+				//$state.go('guide');
 			}).
 			error(function(data,status){
 				alert('Failed to submit data: ' + status + ' Reason: ' + data);

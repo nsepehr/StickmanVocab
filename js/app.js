@@ -1,5 +1,5 @@
 
-var site = angular.module('testSite', ['ui.router','LocalStorageModule', 'main.controller', 'signup.controller', 'video.controller', 'feedback.controller']);
+var site = angular.module('testSite', ['ui.router','LocalStorageModule', 'home.controller', 'signup.controller', 'video.controller', 'feedback.controller']);
 
 // configure our routes
 site.config(['$stateProvider', '$urlRouterProvider', 'localStorageServiceProvider', function($stateProvider, $urlRouterProvider, localStorageServiceProvider) {
@@ -17,17 +17,14 @@ site.config(['$stateProvider', '$urlRouterProvider', 'localStorageServiceProvide
 		
 		.state('home', {
 			url: "/",
-			templateUrl: "pages/home.html"
-		})
-
-		.state('about', {
-			url: "/about",
-			templateUrl: "pages/about.html"
+			templateUrl: "pages/home.html", 
+			controller: 'HomeController'
 		})
 
 		.state('signup', {
 			url: "/signup",
-			templateUrl: "pages/signup.html"
+			templateUrl: "pages/signup.html", 
+			controller: 'SignupFormController'
 		})
 
 		.state('guide', {
