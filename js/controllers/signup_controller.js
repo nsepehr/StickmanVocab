@@ -16,6 +16,18 @@
 			{'level': 'Higher Education'}
 		];
 
+		$scope.checkCookie = function() {
+			if (userName = localStorageService.get('Name')) {
+				console.log = 'I see local storage';
+				if (done = localStorageService.get('Completed')) {
+					console.log = 'This user has completed test';
+				}
+				$state.go('guide');
+			} else {
+				console.log('No local storage... fillout the form');
+			}
+		}
+
 		this.submitForm = function(){
 			var name  = this.formData.firstName;
 			var email = this.formData.email;
@@ -39,8 +51,7 @@
 				} else {
 					console.log('Unable to set local storage');
 				}
-				alert('Successfully inserted data ' + status + '  Data is: ' + data)
-				//$state.go('guide');
+				$state.go('guide');
 			}).
 			error(function(data,status){
 				alert('Failed to submit data: ' + status + ' Reason: ' + data);
