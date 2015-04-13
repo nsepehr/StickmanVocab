@@ -1,10 +1,11 @@
-var site = angular.module('site', ['ui.router','LocalStorageModule', 'site.controllers']);
+
+var site = angular.module('testSite', ['ui.router','LocalStorageModule', 'main.controller', 'signup.controller', 'video.controller', 'feedback.controller']);
 
 // configure our routes
 site.config(['$stateProvider', '$urlRouterProvider', 'localStorageServiceProvider', function($stateProvider, $urlRouterProvider, localStorageServiceProvider) {
 	// Local storage and cookie
 	localStorageServiceProvider
-	.setPrefix('site') // prefixes to any key
+	.setPrefix('testSite') // prefixes to any key
 	.setStorageCookie('360', '/') // In case of fallback set cookie on top domain & expiration of a year
 	.setStorageCookieDomain('') // will need to update once launched the product
 
