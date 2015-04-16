@@ -6,7 +6,7 @@
 
 	var app = angular.module('signup.controller', []);
 
-	app.controller('SignupFormController', ['$scope', '$http', '$state', 'localStorageService', function($scope, $http, $state, localStorageService) {
+	app.controller('SignupFormController', ['$scope', '$http', '$state', '$log', 'localStorageService', function($scope, $http, $state, $log, localStorageService) {
 		// This hash will contain the form information
 		this.formData = {};
 		$scope.educationList = [
@@ -18,13 +18,13 @@
 
 		$scope.checkCookie = function() {
 			if (userName = localStorageService.get('Name')) {
-				console.log = 'I see local storage';
+				$log.debug('I see local storage');
 				if (done = localStorageService.get('Completed')) {
 					console.log = 'This user has completed test';
 				}
 				$state.go('guide');
 			} else {
-				console.log('No local storage... fillout the form');
+				$log.debug('No local storage... fillout the form');
 			}
 		}
 
@@ -47,9 +47,9 @@
 			success(function(data,status){
 				// alert('Successfully inserted ');
 				if (localStorageService.set('Name', name) && localStorageService.set('Email', email)) {
-					console.log('Local storage Successfully inserted for name: ' + name);
+					$log.debug('Local storage Successfully inserted for name: ' + name);
 				} else {
-					console.log('Unable to set local storage');
+					$log.debug('Unable to set local storage');
 				}
 				$state.go('guide');
 			}).

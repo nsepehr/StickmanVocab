@@ -6,7 +6,7 @@
 
 	var app = angular.module('feedback.controller', ['checklist-model']);	
 
-	app.controller('FeedbackController', ['$scope', '$http', 'localStorageService',function($scope, $http, localStorageService) {
+	app.controller('FeedbackController', ['$scope', '$http', '$log', 'localStorageService', function($scope, $http, $log, localStorageService) {
 		$scope.videoData;
 		this.textArea;
 
@@ -16,10 +16,26 @@
 		var submitBtn = "submitBtn";
 
 		if ($scope.userName = localStorageService.get('Email')) {
-			console.log('Got the local storage for feedback');
+			$log.debug('Got the local storage for feedback');
 		} else {
-			console.log('Error... no localStorage');
+			$log.error('Error... no localStorage');
 			$scope.userName = 'Unknown';
+		}
+
+		$scope.setFinishedCookies = function() {
+			// Set the finished cookie anyway
+			$log.debug('Setting feedback init cookies');
+
+			var d = new Date();
+			if (!localStorageService.set('Completed', true)) {
+				$log.error('Unable to set cookie for completion');
+			}
+
+			if (!localStorageService.set('CompletedDate', d)) {
+				$log.error('Unable to set cookie for completion date');
+			}
+
+			return(true);
 		}
 
 		$scope.getVideos = function(){
@@ -29,16 +45,16 @@
 				headers: {'Content-Type': contentType}
 			}).
 			success(function(data,status){
-				console.log('In getVideos(). My data is: %o', data);
+				$log.debug('In getVideos(). My data is: %o', data);
 				$scope.videoData = data;
 			}).
 			error(function(data,status){
-				console.log('Unable to retrieve video. Please try again!');
+				$log.error('Unable to retrieve video!!');
 			});
 		}
 
 		this.submitFeedback = function(){
-			console.log("My text is: " + this.textArea);
+			$log.debug("My text is: " + this.textArea);
 			$http({
 				method: 'POST',
 				url: '../scripts/feedback.php',
@@ -49,18 +65,21 @@
 				headers: {'Content-Type': contentType}
 			}).
 			success(function(data,status){
-				console.log('Successfully sent feedback');
-				console.log('Testing known vidoes: ' + data);
+				$log.debug('Successfully sent feedback');
+				$log.debug('Testing known vidoes: ' + data);
 				angular.element('#'+submitBtn).attr("disabled", true);
 				angular.element('#'+submitBtn).attr("value", "Thank You");
+				if (!localStorageService.set('FeedbackDone', true)) {
+					$log.error('Unable to set cookie for completion');
+				}
 			}).
 			error(function(data,status){
-				console.log('Unable to send feedback: ' + data);
+				$log.error('Unable to send feedback: ' + data);
 			});
 		}
 
 		this.submitKnownVideos = function(){
-			console.log("My video list is %o ", $scope.videos);
+			$log.debug("My video list is %o ", $scope.videos);
 			$http({
 				method: 'POST',
 				url: '../scripts/knownvideos.php',
@@ -71,11 +90,11 @@
 				headers: {'Content-Type': contentType}
 			}).
 			success(function(data,status){
-				console.log('Successfully inserted known words');
-				console.log('Testing known vidoes: ' + data);
+				$log.debug('Successfully inserted known words');
+				$log.debug('Testing known vidoes: ' + data);
 			}).
 			error(function(data,status){
-				console.log('Unable to send feedback: ' + data);
+				$log.error('Unable to send feedback: ' + data);
 			});
 		}
 
