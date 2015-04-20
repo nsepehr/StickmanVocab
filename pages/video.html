@@ -6,26 +6,25 @@
 			<div class='container'>
 				<div class="navbar-header">
 					<a class='navbar-brand' ui-sref='home'>
-						Vocab.me
+						StickMan Vocab
 					</a>
 				</div>
 				<ul class='nav navbar-nav navbar-right'>
-					<li><a class="orange" ui-sref="guide">Back</a></li>
+					<li><a class="yellow" ui-sref="guide">Back</a></li>
 				</ul>
 			</div>
 		</div>
 	</nav>
 
 	<!-- Content -->
-	<div class="video text-center container" ng-controller="VideoURLController" ng-init="getVideoData()">
+	<div class="video text-center container-fluid" ng-controller="VideoURLController" ng-init="getVideoData()">
 		<div class="row">
-			<div class="col-sm-8 col-sm-offset-2">
-				<div>
-					<h4 class="text-left">Question {{videoIndex}} out of {{total}}</h4>
-				</div>
-				<div>
-					<h3 class="text-left">{{videoTitle}}</h3>
-				</div>
+			<div class="col-sm-2">
+				<i class="pull-right fa fa-3x fa-chevron-left" id="backward-btn" ng-click="changeVideo('prev')"></i>
+			</div>
+			<div class="col-sm-8">
+				<h3 class="text-left">{{videoTitle}}</h3>
+				<h4 class="text-right mutted">Question {{videoIndex}} out of {{total}}</h4>
 				<div>
 					<video controls id="video-id">
 						<source src="" type="video/mp4" id="web-vid-src">
@@ -35,12 +34,9 @@
 						Your browser does not support the video tag.
 					</video> 
 				</div>
-				<div>
-					<ul class="list-inline">
-						<li><a href=""><i class="pull-left fa fa-3x fa-step-backward" id="backward-btn" ng-click="changeVideo('prev')"></i></a></li>
-						<li><a href=""><i class="pull-right fa fa-3x fa-step-forward" id="forward-btn"  ng-click="changeVideo('next')"></i></a></li>
-					</ul>
-				</div>
+			</div>
+			<div class="col-sm-2">
+				<i class="pull-left fa fa-3x fa-chevron-right" id="forward-btn"  ng-click="changeVideo('next')"></i>
 			</div>
 		</div>
 	</div>

@@ -1,147 +1,247 @@
-@import url(http://fonts.googleapis.com/css?family=Lato:400,100,100italic,300italic,300,400italic,700,700italic,900,900italic|Lobster);
+/* Color Swatch 
+	
+	Background Color  	#EEEEEE
+	Color (Light)		#EEEEEE
+	Color (Dark)		#444444
+	Yello 				#FFB60E
+	Link:hover			#F39C12
+	Link:active			#F39C12
 
+*/
+
+@import url(http://fonts.googleapis.com/css?family=Lato:400,100,300,700,900|Lobster);
+@import url(http://fonts.googleapis.com/css?family=Fredericka+the+Great);
 * {
 	margin: 0;
 }
 html, body {
 	height: 100%;
+	overflow-x: hidden; 
 }
 body {
 	font-family: "Lato";
 }
 h1, h2, h3, h4, h5, p, a, label, input {
 	font-family: 'Lato';
-	font-weight: 300;
+	font-weight: 400;
 }
 a {
-	color: #F23818;
+	color: #FFB60E;
+}
+a:link {
+
+}
+a:visited {
+
 }
 a:hover {
-	color: #CC280B;
+	color: #F39C12;
+	text-decoration: none;
+}
+a:active {
+	color: #F39C12;
+}
+hr {
+	width: 50%;
+	margin: 1% auto;
+	border-top: 1px solid #333333;
+	border-bottom: 1px solid #666666;
 }
 video {
   width: 100%    !important;
   height: auto   !important;
 }
+/* -------------------- Bootstrap Modifications -------------------- */
 
-
+.navbar-default {
+	background-color: #444444;
+	border-color: #444444;
+}
+.navbar-default .navbar-brand {
+	color: #EEEEEE;
+}
+.navbar-default .navbar-brand:hover, 
+.navbar-default .navbar-brand:focus {
+	color: #FFFFFF;
+}
 /* -------------------- Index Page -------------------- */
 
 /* Index Main Theme */
 .main {
-	background-color: #444;
-	color: #bebebe;
+	background-color: #EEEEEE;
+	color: #444444;
 	position: absolute;
 	height: 100%;
 	width: 100%;
 	top: 0;
 	left: 0;
 }
-.orange {
-	color: #F23818!important;
+.yellow {
+	color: #FFB60E!important;
 }
 .navbar {
 	border-radius: 0;
 }
+.btn {
+	background-color: transparent;
+	padding: 1% 3%;
+}
 .title {
-	font-size: 5em;
-	font-weight: 900;
+	font-family: "Fredericka the Great";
 }
-.action-btn {
-	margin-top: 50px;
-	padding: 10px 20px;
+@media screen and (max-width: 450px) {
+	.title {
+		font-size: 3em;
+	}
 }
-
 /* Footer */
 footer {
 	text-align: center;
 	padding: 2%;
 	background-color: #333;
-	color: #eee;
+	color: #EEEEEE;
 	height: 130px;
 	max-height: 130px;
 }
 /* -------------------- Home Page -------------------- */
-
-/* Home - Navigation */
-.navbar {
-	background-color: #333;
+#home {
+	
 }
-.navbar-default {
-	border: 1px solid transparent;
-}
-.navbar-default .navbar-brand {
-	font-family: 'Lobster';
-	color: #F23818;
-}
-.navbar-default .navbar-nav > li > a:hover {
-    color: #eee;
-}
-.btn-primary {
-    background-color: #F23818;
-    border-color: #F23818;
-}
-.btn-primary:hover {
-	background-color: #CC280B;
-    border-color: #CC280B;
-}
-
 /* Home - Intro */
-.logo {
-	font-family: 'Lobster';
-	color: #F23818;
+.intro {
+	height: 100vh;
+	min-height: 550px;
+	background: #444444 url(../img/home-bg.jpg) no-repeat center center;
+	background-size: cover;
+}
+.intro nav {
+	padding: 20px 40px;
+}
+.intro nav a {
+	float: right;
+	border: 1px solid #FFB60E;
+	border-radius: 5px;
+	background-color: #FFB60E;
+	color: #444444;
+	font-weight: 700;
+	padding: 5px 10px;
+}
+.intro nav a:hover {
+	border: 1px solid #F39C12;
+	background-color: #F39C12;
+}
+.intro-text {
+	color: #EEEEEE;
+	text-align: center;
+	padding-top: 20vh;
+}
+.intro-text h1 {
+	font-family: 'Fredericka the Great';
 	font-size: 7em;
 	text-shadow: 0px 1px 0px rgba(255,255,255,.3), 0px -1px 0px rgba(0,0,0,.7);
 }
 @media screen and (max-width: 450px) {
-	.logo {
+	.intro-text h1 {
 		font-size: 5em;
 	}
 }
-.intro {
-	min-height: 550px;
-	padding: 5% 3%;
-}
-.logo {
-	text-shadow: 0px -1px 0px rgba(255,255,255,.3), 0px 1px 0px rgba(0,0,0,.7);
-}
-.intro h1 {
+.intro-text h2 {
 	margin-bottom: 3%;
 }
-.intro .btn {
-	padding: 1% 2%;
+.intro-text .btn {
+	border: 2px solid #FFB60E;
 	font-size: 1.5em;
+	color: #FFB60E;
 }
-.line {
-	width: 50%;
-	margin: 1% auto;
-	border-top: 1px solid #333;
-	border-bottom: 1px solid #666;
+.intro-text .btn:hover {
+	border: 2px solid #F39C12;
+	color: #F39C12;
+}
+.stickman-hanging {
+	position: absolute;
+	top: -25px;
+	left: 0;
+}
+.stickman-hanging img {
+	height: 230px;
+}
+@media screen and (max-width: 550px) {
+	.stickman-hanging img{
+		height: 170px;
+	}
 }
 
 /* Home - Features */
-#features {
-	background-color: #eee;
-	color: #444;
-	padding: 8% 5%;
+.features {
+	height: 100vh;
+	min-height: 550px;
+	background-color: #F39C12;
+	padding: 10% 5%;
+	text-align: center;
+}
+@media screen and (max-width: 550px) {
+	.features {
+		height: 100%;
+	}
+}
+.features .btn {
+	margin-top: 20px;
+	font-size: 1.5em;
+	color: #444444;
+	border: 2px solid #444444;
+}
+.features .btn:hover {
+	border: 2px solid #333333;
+	color: #333333;
 }
 
-/* Home - Learn More */
-#learn {
+/* Home - How it work */
+.how-it-work {
+	background: #444444 url(../img/home-bg.jpg) no-repeat center center;
+	background-size: cover;
+	color: #EEEEEE;
 	padding: 5%;
 }
-#learn .col-sm-6 {
-	padding: 1% 5% 3% 5%;
-	min-height: 300px;
+.how-it-work h2 {
+	font-size: 5em;
 }
-.macbook {
-	margin: 0 auto;
+.how-it-work h3 {
+	margin-bottom: 70px;
+	font-size: 3.5em; 
+}
+.how-it-work .col-sm-6 {
+	padding: 0 5%;
+	min-height: 200px;
+}
+.how-it-work img {
+	margin-top: 40px;
+}
+.how-it-work .btn {
+	border: 2px solid #EEEEEE;
+	font-size: 1.5em;
+	color: #EEEEEE;
+}
+.how-it-work .btn:hover {
+	border: 2px solid #FFFFFF;
+	color: #FFFFFF;
 }
 
-/* Home - Testimonials */
-#about {
-	background-color: #444;
-	padding: 5%;
+/* Home - About */
+.about {
+	padding: 5% 10%;
+}
+.about h2 {
+	font-size: 5em;
+}
+.about .btn {
+	margin-top: 20px;
+	font-size: 1.5em;
+	color: #444444;
+	border: 2px solid #444444;
+}
+.about .btn:hover {
+	border: 2px solid #333333;
+	color: #333333;
 }
 
 /* -------------------- Sign Up Page -------------------- */
@@ -150,28 +250,52 @@ footer {
 }
 /* Sign Up - Forms */
 .form-control {
-	background-color: #444;
+	background-color: #EEEEEE;
 	border-radius: 0;
 	border-style: solid;
-	border-color: #666;
+	border-color: #E3E3E3;
 	border-width: 0 0 1px 0;
 	box-shadow: none;
 }
 .form-control:focus {
-	border-color: none none #66afe9 none;
+	border-color: #F39C12;
 	box-shadow: none;
+}
+.signup input[type="submit"] {
+	margin-top: 20px;
+	font-size: 1.5em;
+	color: #333333;
+	border: 2px solid #333333;
+}
+.signup input[type="submit"]:hover {
+	border: 2px solid #444444;
+	color: #444444;
 }
 
 /* -------------------- Guide Page -------------------- */
 .guide {
+	min-height: 550px;
 	padding: 5%;
+
+}
+.guide .btn {
+	margin-top: 20px;
+	font-size: 1.2em;
+	color: #333333;
+	border: 2px solid #333333;
+}
+.guide .btn:hover {
+	border: 2px solid #444444;
+	color: #444444;
 }
 
 /* -------------------- Video Page -------------------- */
 .video {
 	padding: 5%;
 }
-
+.video i {
+	margin-top: 35vh;
+}
 /* -------------------- Quiz Page -------------------- */
 .quiz {
 	padding: 5%;
@@ -185,15 +309,25 @@ footer {
   	margin-right: auto;
 }
 .yes {
-	background-color: #333;
+	background-color: #444444;
 }
 .no {
-	background-color: #eee;
+	background-color: #EEEEEE;
 }
 
 /* -------------------- Thank You Page -------------------- */
 
 .thanks {
-	padding: 5% 5% 10%;
+	padding: 5%;
+}
+.thanks .btn {
+	margin-top: 20px;
+	font-size: 1.2em;
+	color: #333333;
+	border: 2px solid #333333;
+}
+.thanks .btn:hover {
+	border: 2px solid #444444;
+	color: #444444;
 }
 

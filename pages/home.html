@@ -1,130 +1,110 @@
-
-<!-- Navigation Bar -->
-<nav class='navbar navbar-default' role='navigation' ng-init="checkCookie()">
-	<div class='navbar-inner'>
-		<div class='container'>
-			<div class='navbar-header'>
-				<button type='button' class='navbar-toggle collapsed' data-toggle='collapse' data-target='#menu-nav'>
-					<span class='sr-only'>Toggle navigation</span>
-					<span class='icon-bar'></span>
-					<span class='icon-bar'></span>
-					<span class='icon-bar'></span>
-				</button>
-				<a class='navbar-brand' ui-sref='home'>
-					Vocab.me
-				</a>
+<div id="home">
+	<!-- Intro Section -->
+	<section class="intro" ng-init="checkCookie()">
+		<span class="stickman-hanging"><img ng-src="img/stickman-01.png"></span>
+		<!-- Navigation Bar -->
+		<nav class="container-fluid hidden-sm hidden-xs">
+			<div class="row">
+				<a ui-sref="signup">{{startHereMsg}}</a>
 			</div>
-			<div class='collapse navbar-collapse' id='menu-nav'>
-				<ul class='nav navbar-nav navbar-right'>
-					<li>
-						<a href="#learn">Learn More</a>
-					</li>
-					<li>
-						<a ui-sref="signup" class='btn btn-primary'>{{startHereMsg}}</a>
-					</li>
-				</ul>
+		</nav>
+		<!-- Main Text -->
+		<div class="intro-text">
+			<h1>Stickman Vocab</h1>
+			<h2>A better way to enhance your <strong class="yellow">vocabulary!</strong></h2>
+			<a ui-sref="signup" class="btn">Start Now</a>
+		</div>
+	</section>
+
+	<!-- Features -->
+	<section class="features">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-sm-4">
+					<img ng-src="img/entertainment.png" height="100">
+					<h2 class="title">Entertainment</h2>
+					<p>Curabitur vulputate mi mi, vitae congue libero volutpat quis. Donec bibendum sed ipsum et rhoncus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum suscipit quam a enim malesuada, sit amet convallis nulla efficitur. </p>
+				</div>
+				<div class="col-sm-4">
+					<img ng-src="img/mnemonical.png" height="100">
+					<h2 class="title">Mnemonical</h2>
+					<p>Curabitur vulputate mi mi, vitae congue libero volutpat quis. Donec bibendum sed ipsum et rhoncus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum suscipit quam a enim malesuada, sit amet convallis nulla efficitur. Aliquam ac est nec sapien accumsan scelerisque et pulvinar metus.</p>
+				</div>
+				<div class="col-sm-4">
+					<img ng-src="img/time.png" height="100">
+					<h2 class="title">Time</h2>
+					<p>Curabitur vulputate mi mi, vitae congue libero volutpat quis. Donec bibendum sed ipsum et rhoncus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum suscipit quam a enim malesuada, sit amet convallis nulla efficitur. Aliquam ac est nec sapien accumsan scelerisque et pulvinar metus.</p>
+				</div>
+			</div>
+			<div class="row">
+				<a ui-sref="signup" class="btn">Start Now</a>
+			</div>
+			<div class="row">
+				<img class="pull-left" ng-src="img/stickman-05.png" height="100">
 			</div>
 		</div>
-	</div>
-</nav>
+	</section>
 
-<!-- Main Section -->
-<section class="intro">
-	<div class="text-center">
-		<div class="logo">Vocab.me</div>
-		<h1>A Better Way to <span class="orange"><strong>Enhance</strong></span> Your <strong>Vocabulary!</strong></h1>
-		<div class="line"></div>
-		<a href="#learn" class="btn btn-primary">Learn More</a>
-	</div>
-</section>
-
-<!-- Features -->
-<section id="features">
-	<div class="container-fluid text-center">
-		<div class="title">Features.</div>
-		<div class="row">
-			<div class="col-sm-4">
-				<img src="img/calendar-clock.svg" height="100">
-				<h1>Feature 1</h1>
-				<p align="justify">Curabitur vulputate mi mi, vitae congue libero volutpat quis. Donec bibendum sed ipsum et rhoncus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum suscipit quam a enim malesuada, sit amet convallis nulla efficitur. Aliquam ac est nec sapien accumsan scelerisque et pulvinar metus.</p>
+	<!-- How It Works -->
+	<section class="how-it-work">
+		<div class="container-fluid">
+			<div class="row text-center">
+				<h3 class="title">How it works?</h3>
 			</div>
-			<div class="col-sm-4">
-				<img src="img/light-bulb.svg" height="100">
-				<h1>Feature 2</h1>
-				<p align="justify">Curabitur vulputate mi mi, vitae congue libero volutpat quis. Donec bibendum sed ipsum et rhoncus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum suscipit quam a enim malesuada, sit amet convallis nulla efficitur. Aliquam ac est nec sapien accumsan scelerisque et pulvinar metus.</p>
+			<div class="row text-right">
+				<div class="col-sm-6">
+					<h2 class="title">Exigent</h2>
+					<p>Curabitur vulputate mi mi, vitae congue libero volutpat quis. Donec bibendum sed ipsum et rhoncus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum suscipit quam a enim malesuada, sit amet convallis nulla efficitur. Aliquam ac est nec sapien accumsan scelerisque et pulvinar metus.</p>
+				</div>
+				<div class="text-left hidden-xs col-sm-6">
+					<img ng-src="img/arrow-right.png" height="200">
+				</div>
 			</div>
-			<div class="col-sm-4">
-				<img src="img/youtube.svg" height="100">
-				<h1>Feature 3</h1>
-				<p align="justify">Curabitur vulputate mi mi, vitae congue libero volutpat quis. Donec bibendum sed ipsum et rhoncus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum suscipit quam a enim malesuada, sit amet convallis nulla efficitur. Aliquam ac est nec sapien accumsan scelerisque et pulvinar metus.</p>
+			<div class="row text-left">
+				<div class="text-right hidden-xs col-sm-6">
+					<img ng-src="img/arrow-left.png" height="200">
+				</div>
+				<div class="col-sm-6">
+					<h2 class="title">Oxygen</h2>
+					<p>Curabitur vulputate mi mi, vitae congue libero volutpat quis. Donec bibendum sed ipsum et rhoncus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum suscipit quam a enim malesuada, sit amet convallis nulla efficitur.</p>
+				</div>
+			</div>
+			<div class="row text-right">
+				<div class="col-sm-6">
+					<h2 class="title">Necessary</h2>
+					<p>Curabitur vulputate mi mi, vitae congue libero volutpat quis. Donec bibendum sed ipsum et rhoncus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum suscipit quam a enim malesuada, sit amet convallis nulla efficitur.</p>
+				</div>
+				<div class="col-sm-6 text-center">
+				<img ng-src="img/stickman-04.png" height="180">
+			</div>
+			</div>
+			<div class="row text-center">
+				<a ui-sref="signup" class="btn">Start Now</a>
 			</div>
 		</div>
-		<div>
-			<a class="btn btn-primary action-btn" ui-sref="signup">Start Now</a>
-		</div>
-		
-	</div>
-</section>
+	</section>
 
-<!-- How It Works -->
-<section id="learn">
-	<div class="container">
-		<div class="row">
-			<div class="text-center">
-				<div class="title">How It Works.</div>
-				<div class="line"></div>
-			</div>
-			
-			<div class="col-sm-6">
-				<img class="macbook img-responsive" src="img/imac.png">
-			</div>
-			<div class="col-sm-6">
-				<h1>Step 1</h1>
-				<p>Curabitur vulputate mi mi, vitae congue libero volutpat quis. Donec bibendum sed ipsum et rhoncus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum suscipit quam a enim malesuada, sit amet convallis nulla efficitur. Aliquam ac est nec sapien accumsan scelerisque et pulvinar metus.</p>
-			</div>
-		</div>
-		<div class="row">
-			<div class="visible-xs col-sm-6">
-				<img class="macbook img-responsive" src="img/imac.png">
-			</div>
-			<div class="col-sm-6">
-				<h1>Step 2</h1>
-				<p>Curabitur vulputate mi mi, vitae congue libero volutpat quis. Donec bibendum sed ipsum et rhoncus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum suscipit quam a enim malesuada, sit amet convallis nulla efficitur. Aliquam ac est nec sapien accumsan scelerisque et pulvinar metus.</p>
-			</div>
-			<div class="hidden-xs col-sm-6">
-				<img class="macbook img-responsive" src="img/imac.png">
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-sm-6">
-				<img class="macbook img-responsive" src="img/imac.png">
-			</div>
-			<div class="col-sm-6">
-				<h1>Step 3</h1>
-				<p>Curabitur vulputate mi mi, vitae congue libero volutpat quis. Donec bibendum sed ipsum et rhoncus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum suscipit quam a enim malesuada, sit amet convallis nulla efficitur. Aliquam ac est nec sapien accumsan scelerisque et pulvinar metus.</p>
-			</div>
-		</div>
-		<div class="line"></div>
-	</div>
-</section>
+	<!-- About SMV -->
+	<section class="about">
+		<h2 class="title">About S.M.V.</h2>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-sm-8">
+					<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam volutpat a justo ut ultricies. Suspendisse suscipit luctus mauris, eu bibendum tortor lacinia non. Ut porttitor risus et augue aliquet gravida. Nullam tincidunt dui at arcu tempor rutrum. Cras vel orci sit amet dui condimentum laoreet id at nisi. Fusce sed tempus orci. Cras consequat ultrices mi, nec tempor urna consectetur non. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam eu ligula leo. Vivamus vulputate tellus at est gravida, sed mattis nibh sagittis. Vivamus et ex in ligula imperdiet vehicula sed eget sem.</p>
 
-<!-- About SMV -->
-<section id="about">
-	<div class="container">
-		<div class="row">
-			<div class="col-sm-8">
-				<div class="title">About S.M.V.</div>
-				<p align="justify"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam volutpat a justo ut ultricies. Suspendisse suscipit luctus mauris, eu bibendum tortor lacinia non. Ut porttitor risus et augue aliquet gravida. Nullam tincidunt dui at arcu tempor rutrum. Cras vel orci sit amet dui condimentum laoreet id at nisi. Fusce sed tempus orci. Cras consequat ultrices mi, nec tempor urna consectetur non. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam eu ligula leo. Vivamus vulputate tellus at est gravida, sed mattis nibh sagittis. Vivamus et ex in ligula imperdiet vehicula sed eget sem.</p>
+					<p>Nunc sed libero at velit sollicitudin placerat. Integer non iaculis arcu. Curabitur justo tellus, lobortis non ex sit amet, vehicula ornare dui. Mauris nulla erat, imperdiet nec ipsum in, accumsan dapibus nibh. Etiam et dictum magna. Pellentesque dignissim est nec convallis gravida. Nam euismod libero vitae tincidunt pulvinar. Aenean et nisi in tellus venenatis faucibus. </p>
 
-				<p align="justify">Nunc sed libero at velit sollicitudin placerat. Integer non iaculis arcu. Curabitur justo tellus, lobortis non ex sit amet, vehicula ornare dui. Mauris nulla erat, imperdiet nec ipsum in, accumsan dapibus nibh. Etiam et dictum magna. Pellentesque dignissim est nec convallis gravida. Nam euismod libero vitae tincidunt pulvinar. Aenean et nisi in tellus venenatis faucibus. </p>
-
-				<p align="justify"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam volutpat a justo ut ultricies. Suspendisse suscipit luctus mauris, eu bibendum tortor lacinia non. Ut porttitor risus et augue aliquet gravida. Nullam tincidunt dui at arcu tempor rutrum. Cras vel orci sit amet dui condimentum laoreet id at nisi. Fusce sed tempus orci. Cras consequat ultrices mi, nec tempor urna consectetur non. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam eu ligula leo. Vivamus vulputate tellus at est gravida, sed mattis nibh sagittis. Vivamus et ex in ligula imperdiet vehicula sed eget sem.</p>
-				<div class="text-center"><a class="btn btn-primary action-btn" ui-sref="signup">Start Now</a></div>
+				</div>
+				<div class="col-sm-4 hidden-xs hidden-sm">
+					<img class="img-responsive" ng-src="img/brain.png">
+				</div>
 			</div>
-			<div class="col-sm-4">
-				<img class="img-responsive" src="img/brain.png">
+			<div class="row text-center">
+				<a ui-sref="signup" class="btn">Start Now</a>
 			</div>
 		</div>
-		
-	</div>
-</section>
+	</section>
+
+
+</div>
+
