@@ -1,3 +1,4 @@
+
 <div id="home">
 	<!-- Intro Section -->
 	<section class="intro" ng-init="checkCookie()">
@@ -5,7 +6,7 @@
 		<!-- Navigation Bar -->
 		<nav class="container-fluid hidden-sm hidden-xs">
 			<div class="row">
-				<a ui-sref="signup">{{startHereMsg}}</a>
+				<a ui-sref="{{startUrl}}" class='btn' id="{{startBtnID}}">{{startHereMsg}}</a>
 			</div>
 		</nav>
 		<!-- Main Text -->

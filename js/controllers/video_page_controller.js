@@ -6,7 +6,7 @@
 
 	var app = angular.module('video.controller', []);	
 
-	app.controller('VideoURLController', ['$scope', '$http', '$state', function($scope, $http, $state) {
+	app.controller('VideoURLController', ['$scope', '$http', '$state', '$log', function($scope, $http, $state, $log) {
 		// ID tags ... May not be the best approach to manipulate the DOM elements directly
 		//		ng-src from angular has issues in some browsers. Reading online, seems like there's no good solution
 		var videoID = "video-id";
@@ -26,13 +26,13 @@
 				headers: {'Content-Type': contentType}
 			}).
 			success(function(data,status){
-				console.log('In getVideoData(). My data is: %o', data);
+				$log.debug('In getVideoData func. My data is: %o', data);
 				$scope.videoData = data;
 				$scope.total = $scope.videoData.length;
 				$scope.playVideo();
 			}).
 			error(function(data,status){
-				alert('Unable to retrieve video. Please try again!');
+				alert('Unable to retrieve video. Please try reloading page!');
 			});
 		}
 
@@ -49,7 +49,7 @@
 
 		$scope.playVideo = function(){
 			thisVideo = $scope.videoData[$scope.videoIndex-1];
-			console.log('In playVideo(). My data is: %o', thisVideo);
+			$log.debug('In playVideo func. My data is: %o', thisVideo);
 			angular.element('#'+videoID).get(0).pause();
 			angular.element('#'+srcWebID).attr("src", thisVideo.URL); 
 			angular.element('#'+videoID).get(0).load();

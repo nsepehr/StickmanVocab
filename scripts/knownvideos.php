@@ -7,7 +7,7 @@ require_once 'login_dev.php';
 require_once 'Connect_MySQL.php'; 
 
 // Form variables
-$tableName  = 'knownvideos';
+$tableName  = 'knownwords';
 $fields     = array('user' ,'knownWords');
 
 
@@ -53,7 +53,7 @@ function addKnownWords($connect, $fields, $table)
     }
 
     // Built the query for inserting the user data
-    $query = "INSERT INTO `$table` (`ID`, `User`, `KnownWords`) 
+    $query = "INSERT INTO `$table` (`ID`, `Email`, `KnownWords`) 
             VALUES (NULL, '$user', '$known')";
     $connect->query($query);
 }
