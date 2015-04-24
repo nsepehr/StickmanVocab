@@ -6,7 +6,8 @@
 
 	var app = angular.module('video.controller', []);	
 
-	app.controller('VideoURLController', ['$scope', '$http', '$state', '$log', function($scope, $http, $state, $log) {
+	app.controller('VideoController', ['$scope', '$http', '$location', '$route','$log', '$timeout', 
+		function($scope, $http, $location, $route, $log, $timeout) {
 		// ID tags ... May not be the best approach to manipulate the DOM elements directly
 		//		ng-src from angular has issues in some browsers. Reading online, seems like there's no good solution
 		var videoID = "video-id";
@@ -19,6 +20,21 @@
 		$scope.videoTitle;
 		$scope.videoURL;
 
+		// List of the words the user knew
+		$scope.knownWords = {};
+
+		$scope.userName  = localStorageService.get('Email')
+
+		// Get the list of known words for the user
+		// Get the list of all videos
+		// Based on these two data, create a new data which contains unknown words
+		$scope.init = function() {
+			$scope.getVideoData();
+			$scope.getKnownWords();
+			$scope.createVideoList();
+			//$scope.createFlashCardList();
+		}
+
 		$scope.getVideoData = function(){
 			$http({
 				method: 'GET',
@@ -27,9 +43,27 @@
 			}).
 			success(function(data,status){
 				$log.debug('In getVideoData func. My data is: %o', data);
+				$scope.knownWords = data;
+			}).
+			error(function(data,status){
+				alert('Unable to retrieve video. Please try reloading page!');
+			});
+		}
+
+		$scope.getKnownWords = function(){
+			$http({
+				method: 'POST',
+				url: '../scripts/getknownwords.php',
+				data: $.param({
+					'user'        : $scope.userName,
+				}),
+				headers: {'Content-Type': contentType}
+			}).
+			success(function(data,status){
+				$log.debug('In getVideoData func. My data is: %o', data);
 				$scope.videoData = data;
 				$scope.total = $scope.videoData.length;
-				$scope.playVideo();
+				$timeout($scope.playVideo,'1000'); // Give a half a second delay before playing the next video
 			}).
 			error(function(data,status){
 				alert('Unable to retrieve video. Please try reloading page!');
@@ -42,9 +76,10 @@
 			} else if (state == 'prev' && $scope.videoIndex > 1) {
 				$scope.videoIndex--;
 			} else if (state == 'next' && $scope.videoIndex == $scope.total) {
-				$state.go('thanks');
+				$location.path('/thanks');
+				$route.reload();
 			}
-			$scope.playVideo();
+			$timeout($scope.playVideo,'500'); // Give a half a second delay before playing the next video
 		}
 
 		$scope.playVideo = function(){
