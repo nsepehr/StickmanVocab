@@ -1,49 +1,66 @@
 
-var site = angular.module('testSite', ['ui.router','LocalStorageModule', 'home.controller', 'signup.controller', 'video.controller', 'feedback.controller']);
+var site = angular.module('testSite', ['ngRoute','LocalStorageModule', 'home.controller', 'signup.controller', 'guide.controller','video.controller', 'feedback.controller']);
+
+// Create a service to pass data between controllers
+site.factory('siteData', function() {
+	
+	var savedData = {}
+	function set(key,value) {
+		savedData['key'] = value;
+	}
+
+	function get(key) {
+		return savedData['key'];
+	}
+
+	return {
+		set: set,
+		get: get
+	}
+
+});
 
 // configure our routes
-site.config(['$stateProvider', '$urlRouterProvider', 'localStorageServiceProvider', function($stateProvider, $urlRouterProvider, localStorageServiceProvider) {
+site.config(['$routeProvider', 'localStorageServiceProvider', function($routeProvider, localStorageServiceProvider) {
 	// Local storage and cookie
 	localStorageServiceProvider
 	.setPrefix('testSite') // prefixes to any key
 	.setStorageCookie('360', '/') // In case of fallback set cookie on top domain & expiration of a year
 	.setStorageCookieDomain('') // will need to update once launched the product
 
-
-	// Fallback State
-	$urlRouterProvider.otherwise('/');
-
-	$stateProvider
+	$routeProvider
 		
-		.state('home', {
-			url: "/",
+		.when('/home', {
 			templateUrl: "pages/home.html", 
 			controller: 'HomeController'
 		})
 
-		.state('signup', {
-			url: "/signup",
+		.when('/signup', {
 			templateUrl: "pages/signup.html", 
 			controller: 'SignupFormController'
 		})
 
-		.state('guide', {
-			url: "/guide",
-			templateUrl: "pages/guide.html"
+		.when('/guide', {
+			templateUrl: "pages/guide.html", 
+			controller: 'GuideController'
 		})
 
-		.state('video', {
+		.when('/video', {
 			url: "/video",
-			templateUrl: "pages/video.html"
+			templateUrl: "pages/video.html", 
+			controller: 'VideoController'
 		})
 
-		.state('quiz', {
-			url: "/quiz",
+		.when('/quiz', {
 			templateUrl: "pages/quiz.html"
 		})
 
-		.state('thanks', {
-			url: "/thanks",
-			templateUrl: "pages/thanks.html"
+		.when('/thanks', {
+			templateUrl: "pages/thanks.html",
+			controller: 'FeedbackController'
 		})
+
+		.otherwise({
+			redirectTo: '/home'
+		});
 }]);

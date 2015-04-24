@@ -6,7 +6,7 @@
 
 	var app = angular.module('signup.controller', []);
 
-	app.controller('SignupFormController', ['$scope', '$http', '$state', '$log', 'localStorageService', function($scope, $http, $state, $log, localStorageService) {
+	app.controller('SignupFormController', ['$scope', '$http', '$location', '$route', '$log', 'siteData', 'localStorageService', function($scope, $http, $location, $route, $log, siteData, localStorageService) {
 		// This hash will contain the form information
 		this.formData = {};
 		$scope.educationList = [
@@ -15,18 +15,6 @@
 			{'level': 'Bachelor Degree'},
 			{'level': 'Higher Education'}
 		];
-
-		$scope.checkCookie = function() {
-			if (userName = localStorageService.get('Name')) {
-				$log.debug('I see local storage');
-				if (done = localStorageService.get('Completed')) {
-					console.log = 'This user has completed test';
-				}
-				$state.go('guide');
-			} else {
-				$log.debug('No local storage... fillout the form');
-			}
-		}
 
 		this.submitForm = function(){
 			var name  = this.formData.firstName;
@@ -46,12 +34,17 @@
 			}).
 			success(function(data,status){
 				// alert('Successfully inserted ');
+				// siteData.set('UserName', name);
+				// siteData.set('UserEmail', email);
 				if (localStorageService.set('Name', name) && localStorageService.set('Email', email)) {
 					$log.debug('Local storage Successfully inserted for name: ' + name);
 				} else {
 					$log.debug('Unable to set local storage');
 				}
-				$state.go('guide');
+
+				$log.debug('Chaning location to guide');
+				$location.path('/guide'); // Go to the guide page
+				$route.reload();
 			}).
 			error(function(data,status){
 				alert('Failed to submit data: ' + status + ' Reason: ' + data);

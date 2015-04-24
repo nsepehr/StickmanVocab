@@ -1,16 +1,13 @@
-<div class="full-height">
+<div class="full-height" ng-init="init()">
 	<!-- Navigation -->
 	<nav class='navbar navbar-default' role='navigation'>
 		<div class='navbar-inner'>
 			<div class='container'>
 				<div class="navbar-header">
-					<a class='navbar-brand' ui-sref='home'>
+					<a class='navbar-brand' href='#/home'>
 						StickMan Vocab
 					</a>
 				</div>
-				<ul class='nav navbar-nav navbar-right'>
-					<li><a class="yellow" ui-sref="video">Next</a></li>
-				</ul>
 			</div>
 		</div>
 	</nav>
@@ -23,40 +20,42 @@
 					<h1>Instruction</h1>
 					<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam volutpat a justo ut ultricies. Suspendisse suscipit luctus mauris, eu bibendum tortor lacinia non. Ut porttitor risus et augue aliquet gravida. Nullam tincidunt dui at arcu tempor rutrum. Cras vel orci sit amet dui condimentum laoreet id at nisi. Fusce sed tempus orci. Cras consequat ultrices mi, nec tempor urna consectetur non. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam eu ligula leo. Vivamus vulputate tellus at est gravida, sed mattis nibh sagittis. Vivamus et ex in ligula imperdiet vehicula sed eget sem.</p>
 				</div>
-				<div class="col-sm-6">
-					<h3>Please select the words you don't know:</h3>
-					<div class="row">
-						<div class="col-sm-4">
-							<input type="checkbox" name="" required ng-model="">
-							<label>Word No 1</label>
-						</div>
-						<div class="col-sm-4">
-							<input type="checkbox" name="" required ng-model="">
-							<label>Word No 2</label>
-						</div>
-						<div class="col-sm-4">
-							<input type="checkbox" name="" required ng-model="">
-							<label>Word No 3</label>
-						</div>
-						<div class="col-sm-4">
-							<input type="checkbox" name="" required ng-model="">
-							<label>Word No 4</label>
-						</div>
-						<div class="col-sm-4">
-							<input type="checkbox" name="" required ng-model="">
-							<label>Word No 5</label>
-						</div>
-						<div class="col-sm-4">
-							<input type="checkbox" name="" required ng-model="">
-							<label>Word No 6</label>
+				<form method="post" name="unknownVideoForm" ng-submit="submitKnownWords()" novalidate>
+					<div class="col-sm-6">
+						<h3>Please select the words you don't know:</h3>
+						<div class="row">
+								<div class="col-sm-4" ng-repeat="video in videoData">
+									<input type="checkbox" id="{{video.NAME}}" checklist-model="words.know" checklist-value="video.NAME">
+									<label>{{video.NAME}}</label>
+								</div>
+								<!-- Just keep them for reference for now
+								<div class="col-sm-4">
+									<input type="checkbox" name="word2" required ng-model="knownVideo.word2">
+									<label>Word No 2</label>
+								</div>
+								<div class="col-sm-4">
+									<input type="checkbox" name="word3" required ng-model="knownVideo.word3">
+									<label>Word No 3</label>
+								</div>
+								<div class="col-sm-4">
+									<input type="checkbox" name="word4" required ng-model="knownVideo.word4">
+									<label>Word No 4</label>
+								</div>
+								<div class="col-sm-4">
+									<input type="checkbox" name="word5" required ng-model="knownVideo.word5">
+									<label>Word No 5</label>
+								</div>
+								<div class="col-sm-4">
+									<input type="checkbox" name="word6" required ng-model="knownVideo.word6">
+									<label>Word No 6</label>
+								</div>
+								-->
 						</div>
 					</div>
-				</div>
-				
+					<div class="row text-center"><input name="submitBtn" id="submitBtn" type="submit" value="Continue" class="row text-center btn"></div>
+				</form>
 			</div>
-			
-
-			<div class="row text-center"><a class="btn" ui-sref="video">Start Now</a></div>
+				<!-- <div class="row text-center"><a class="btn" href="#/video">Start Now</a></div> -->
 		</div>
 	</div>
 </div>

@@ -5,19 +5,19 @@
 		<div class='navbar-inner'>
 			<div class='container'>
 				<div class="navbar-header">
-					<a class='navbar-brand' ui-sref='home'>
+					<a class='navbar-brand' href='#/home'>
 						StickMan Vocab
 					</a>
 				</div>
 				<ul class='nav navbar-nav navbar-right'>
-					<li><a class="yellow" ui-sref="guide">Back</a></li>
+					<li><a class="yellow" href="#/guide">Back</a></li>
 				</ul>
 			</div>
 		</div>
 	</nav>
 
 	<!-- Content -->
-	<div class="video text-center container-fluid" ng-controller="VideoURLController" ng-init="getVideoData()">
+	<div class="video text-center container-fluid" ng-init="init()">
 		<div class="row">
 			<div class="col-sm-2">
 				<i class="pull-right fa fa-3x fa-chevron-left" id="backward-btn" ng-click="changeVideo('prev')"></i>
