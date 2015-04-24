@@ -41,6 +41,13 @@ a:hover {
 a:active {
 	color: #F39C12;
 }
+select {
+	background-color: transparent;
+	width: 100%;
+	border: none;
+	border-bottom: 1px solid #E3E3E3;
+	border-radius: 0;
+}
 hr {
 	width: 50%;
 	margin: 1% auto;
