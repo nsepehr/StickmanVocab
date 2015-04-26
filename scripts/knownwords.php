@@ -18,7 +18,7 @@ $fields     = array('user' ,'knownWords');
 $connect = new ConnectMySQL($db_userName, $db_password, $db_host, $db_database);
 
 // Validate the required fields
-$connect->validateFields($_POST, $fields);
+$connect->validateFields($_POST, $fields['0']);
 
 // Test connections to DB
 $connect->connect();

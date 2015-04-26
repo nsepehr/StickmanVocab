@@ -77,6 +77,14 @@
 				$location.path('/video');
 				$route.reload();
 				return;
+			} else if ($scope.words.know.length >= $scope.videoData.length - 1) {
+				alert('Can NOT qualify you for this test... You know too many words :)');
+				return;
+			}
+
+			if ($scope.words.know.length == 0) {
+				// Make the list at least have one dummy value
+				$scope.words.know.push('NONE');
 			}
 
 			$http({
@@ -91,11 +99,13 @@
 			success(function(data,status){
 				$log.debug('Successfully inserted known words');
 				localStorageService.set($scope.userName + 'knownvideosSubmitted', true);
+				siteData.set('knownWords', $scope.words.know);
 				$location.path('/video');
 				$route.reload();
 			}).
 			error(function(data,status){
-				$log.error('Unable to send knownvideos: ' + data);
+				$log.debug('Error is: ' + data);
+				alert('Unable to continue, please try again');
 				$route.reload(); // Is this a good idea?
 			});
 		}

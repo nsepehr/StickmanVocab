@@ -20,6 +20,19 @@ site.factory('siteData', function() {
 
 });
 
+// Create a service for calling the video data php to get the video data needed
+site.factory('httpVideoDataService', function($http) {
+	var myData = function() {
+		return $http({method: "GET", url: '../scripts/video_data.php'}).success(function(result){
+			return result.data;
+		})
+	};
+	return {
+		get: myData
+	};
+});
+
+
 // configure our routes
 site.config(['$routeProvider', 'localStorageServiceProvider', function($routeProvider, localStorageServiceProvider) {
 	// Local storage and cookie
