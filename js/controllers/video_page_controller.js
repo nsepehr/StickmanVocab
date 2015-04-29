@@ -69,64 +69,6 @@
 			})
 		}
 
-		// Get the list of video data from the server using http call
-		/* NO NEED ANYMORE... DELETE
-		$scope.getVideoData = function(){
-			var videoData = {};
-
-			return $q(function(resolve, reject) {
-				$http({
-					method: 'GET',
-					url: '../scripts/video_data.php',
-					headers: {'Content-Type': contentType}
-				}).
-				success(function(data,status){
-					$log.debug('In getVideoData func. My data is: %o', data);
-					videoData = data;
-				}).
-				error(function(data,status){
-					$log.debug('Cant get data: ' + data);
-					alert('Unable to retrieve video. Please try reloading the page!');
-				});
-			});
-
-			return videoData;
-		}
-		*/
-
-		// Get the list of the words the user knows (which was submitted in the previous page)
-		//   Either get the words through angualr if avaialble, if not fall back to database
-		/* NO NEED ANYMORE... DELETE
-		$scope.getKnownWords = function(){
-			var knownWords = {};
-			if (knownWords = siteData.get('knownWords')) {
-				$log.debug('Got the known words through angualr');
-				$timeout($scope.playVideo, '1000');
-			} else {
-				// This is the fallback method in case user refreshes the page
-				$log.debug('Falling back to the http method to get known videos');
-				$http({
-					method: 'POST',
-					url: '../scripts/getknownwords.php',
-					data: $.param({
-						'user'        : $scope.userName,
-					}),
-					headers: {'Content-Type': contentType}
-				}).
-				success(function(data,status){
-					$log.debug('In getKnownWords func. My data is: %o', data);
-					knownWords = data;
-				}).
-				error(function(data,status){
-					alert('Unable to retrieve video. Please try reloading page!');
-				});
-			}
-
-			// Return the known words list
-			return knownWords;
-		}
-		*/
-
 		// Figureout the maximum number of videos & flash-cards the user needs to watch
 		//   We want to show an equal # of videos & flash-cards, so we must subtitue the maximum # of available words
 		//   from the known videos and divide that # by 2
@@ -240,11 +182,11 @@
 				headers: {'Content-Type': contentType}
 			}).
 			success(function(data,status){
-				$log.debug('Successfully inserted known words');
+				$log.debug('Successfully inserted watches');
 			}).
 			error(function(data,status){
 				$log.debug('Error is: ' + data);
-				alert('An error occured... Please contact SMV support');
+				alert('An error occured... Please contact SMV support with this code "error 100"');
 			});
 
 			$location.path('/thanks');

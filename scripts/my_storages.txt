@@ -1,0 +1,43 @@
+This is just for reference keeping so we know what storage gets used where. 
+
+Name
+Email
+Email+knownVideosSubmitted
+Email+watchedVideos
+Email+CompletedWatchDate
+Email+FeedbackDone
+
+
+---- Logic ----
+	Home page: 
+
+	Signup page:
+		* Sets the Name & Email 
+
+	Guide page: 
+		* Reads the Email & Email+knownVideosSubmitted
+			- If no email, go to signup page
+			- If Email+knownVideosSubmitted
+				# Check the boxes user previously checked => to be implemented
+				# Change the button name to "back to video"
+		* Sets the Email+knownVideosSubmitted
+
+	Video page: 
+		* Reads Email+knownVideosSubmitted
+			- If not set, go back to guide
+		* Sets Email+watchedVideos
+
+	Feedback page:
+		* Reads Email, Email+watchedVideos & Email+FeedbackDone
+			- If no Email
+				# go back to signup page
+			- if no Email+watchedVideos
+				# go back to video page
+			- if Email+FeedbackDone
+				# disable the submit button
+				# change the button text to Thank You
+
+		* Sets Email+CompletedWatchDate
+		* Sets Email+FeedbackDone
+		* Removes all cookies except:
+			- Email, Email+CompletedWatchDate, Email+FeedbackDone
