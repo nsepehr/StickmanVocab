@@ -7,18 +7,19 @@
 	app.controller('HomeController', ['localStorageService', '$scope', '$log', function(localStorageService, $scope, $log){
 		$scope.startHereMsg = 'Get Started';
 		$scope.startBtnID = 'startBtn';
-		$scope.startUrl = '/signup';
+		$scope.startUrl = '#/signup';
+		$scope.showNotUser = 'false';
 
 		$scope.checkCookie = function() {
-			var name      = localStorageService.get('Name');
-			var completed = localStorageService.get('Completed');
-			var completedDate = localStorageService.get('CompletedDate');
-			var feedback  = localStorageService.get('FeedbackDone');
+			$scope.userName = localStorageService.get('Name');
+			var name  = $scope.userName; 
+			var email = localStorageService.get('Email');
 
-			if (name) {
+			if (name && email) {
+				$scope.showNotUser = 'true';
 				$log.debug('In home... Local storage exists');
-				//angular.element('#'+$scope.startBtnID).attr("ui-sref", '#');
-				if (completed) {
+				
+				if (completedDate = localStorageService.get(email + 'CompletedWatchDate')) {
 					$log.debug('User has completed watching the videos');
 					$log.debug('My completed date is: ' + completedDate);
 					var now = new Date();
@@ -30,22 +31,27 @@
 					if (weekLater > now) {
 						$log.debug('it is a week after you have taken the test');
 						$scope.startHereMsg = 'Click here ' + name;
-						$scope.startUrl = '/quiz';
-					} else if (!feedback) {
-						// If it hasn't been a wekk and user hasn't left a feedback, take them to feedback page
-						$log.debug('No feedback is left');
-						$scope.startHereMsg = 'Pease leave feedback ' + name;
-						$scope.startUrl = '/thanks';
-					} else {
-						// User has finished watching the videos and has left a feedback
-						// But it is not a week after the feedback is left
-						$scope.startHereMsg = 'Thanks ' + name;
-						$scope.startUrl = '/signup';
-					}
-				} else {
-					// User has not finished watching all the videos
+						$scope.startUrl = '#/quiz';
+						return;
+					} 
+				} 
+				if (localStorageService.get(email + 'FeedbackDone')) {
+					// User has left a feedback and is done with watching the videos... no more action needed
+					$log.debug('Feedback is left');
+					$scope.startHereMsg = 'Thanks ' + name;
+					$scope.startUrl = '#/';
+				} else if (localStorageService.get(email + 'watchedVideos')) {
+					// User has watched the videos, but didn't leave a feedback... ask for a feedback
+					$scope.startHereMsg = 'Leave Feedback ' + name;
+					$scope.startUrl = '#/thanks';
+				} else if (localStorageService.get(email + 'knownVideosSubmitted')) {
+					// User has gone through the guide, but has not watched the videos
 					$scope.startHereMsg = 'Continue ' + name;
-					$scope.startUrl = '/guide'; // User has finished the test, stay on page
+					$scope.startUrl = '#/videos';
+				} else {
+					// User cookie available, but seems like the user stopped at guide page
+					$scope.startHereMsg = 'Continue ' + name;
+					$scope.startUrl = '#/guide';
 				}
 			} else {
 				$log.debug('No local storage');

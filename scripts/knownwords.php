@@ -45,12 +45,17 @@ function addKnownWords($connect, $fields, $table)
     $user     = $connect->sanitizeString($_POST[$fields[0]]);
     $words    = $_POST[$fields[1]];
 
-    // Loop through the array and create a sring of the known videos
-    // The delimiter is /
-    $known = '';
-    foreach ($words as $key) {
-    	$known .= $key . '/';
+    if (count($words) > 1) {
+        // Loop through the array and create a sring of the known videos
+        // The delimiter is /
+        $known = implode('/', $words);
+    } else if (count($words) == 1) {
+        $known = $words['0'];
+    } else {
+        $known = 'NONE';
     }
+
+    
 
     // Built the query for inserting the user data
     $query = "INSERT INTO `$table` (`ID`, `Email`, `KnownWords`) 

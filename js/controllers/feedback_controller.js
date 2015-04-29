@@ -6,7 +6,8 @@
 
 	var app = angular.module('feedback.controller', ['checklist-model']);	
 
-	app.controller('FeedbackController', ['$scope', '$http', '$log', 'localStorageService', function($scope, $http, $log, localStorageService) {
+	app.controller('FeedbackController', ['$scope', '$http', '$log', 'localStorageService', '$location', '$route', 
+		function($scope, $http, $log, localStorageService, $location, $route) {
 		$scope.videoData;
 		this.textArea;
 
@@ -19,7 +20,14 @@
 			$log.debug('Got the local storage for feedback');
 		} else {
 			$log.error('Error... no localStorage');
-			$scope.userName = 'Unknown';
+			$location.path('/signup');
+			$route.reload();
+			return;
+		}
+
+		if (localStorageService.get($scope.userName + 'FeedbackDone')) {
+			angular.element('#'+submitBtn).attr("disabled", true);
+			angular.element('#'+submitBtn).attr("value", "Thank You");
 		}
 
 		$scope.setFinishedCookies = function() {
@@ -27,30 +35,11 @@
 			$log.debug('Setting feedback init cookies');
 
 			var d = new Date();
-			if (!localStorageService.set('Completed', true)) {
-				$log.error('Unable to set cookie for completion');
-			}
-
-			if (!localStorageService.set('CompletedDate', d)) {
+			if (!localStorageService.set($scope.userName + 'CompletedWatchDate', d)) {
 				$log.error('Unable to set cookie for completion date');
 			}
 
 			return(true);
-		}
-
-		$scope.getVideos = function(){
-			$http({
-				method: 'GET',
-				url: '../scripts/video_data.php',
-				headers: {'Content-Type': contentType}
-			}).
-			success(function(data,status){
-				$log.debug('In getVideos(). My data is: %o', data);
-				$scope.videoData = data;
-			}).
-			error(function(data,status){
-				$log.error('Unable to retrieve video!!');
-			});
 		}
 
 		this.submitFeedback = function(){
@@ -69,29 +58,9 @@
 				$log.debug('Testing known vidoes: ' + data);
 				angular.element('#'+submitBtn).attr("disabled", true);
 				angular.element('#'+submitBtn).attr("value", "Thank You");
-				if (!localStorageService.set('FeedbackDone', true)) {
+				if (!localStorageService.set($scope.userName + 'FeedbackDone', true)) {
 					$log.error('Unable to set cookie for completion');
 				}
-			}).
-			error(function(data,status){
-				$log.error('Unable to send feedback: ' + data);
-			});
-		}
-
-		this.submitKnownVideos = function(){
-			$log.debug("My video list is %o ", $scope.videos);
-			$http({
-				method: 'POST',
-				url: '../scripts/knownvideos.php',
-				data: $.param({
-					'user'        : $scope.userName,
-					'knownWords'  : $scope.videos.checked
-				}),
-				headers: {'Content-Type': contentType}
-			}).
-			success(function(data,status){
-				$log.debug('Successfully inserted known words');
-				$log.debug('Testing known vidoes: ' + data);
 			}).
 			error(function(data,status){
 				$log.error('Unable to send feedback: ' + data);

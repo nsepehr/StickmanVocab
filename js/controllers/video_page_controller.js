@@ -6,8 +6,8 @@
 
 	var app = angular.module('video.controller', []);	
 
-	app.controller('VideoController', ['$scope', '$http', '$location', '$route','$log', '$timeout', 'siteData', 'localStorageService', 'httpVideoDataService',
-		function($scope, $http, $location, $route, $log, $timeout, siteData, localStorageService, httpVideoDataService) {
+	app.controller('VideoController', ['$scope', '$http', '$location', '$route','$log', '$timeout', 'siteData', 'localStorageService', 'httpVideoDataService', 'httpKnownWordsService',
+		function($scope, $http, $location, $route, $log, $timeout, siteData, localStorageService, httpVideoDataService, httpKnownWordsService) {
 		// ID tags ... May not be the best approach to manipulate the DOM elements directly
 		//		ng-src from angular has issues in some browsers. Reading online, seems like there's no good solution
 		var videoID = "video-id";
@@ -23,80 +23,57 @@
 		$scope.videoURL;
 
 		$scope.userName  = localStorageService.get('Email');
+		$scope.seenGuide = localStorageService.get($scope.userName + 'knownvideosSubmitted')
 
-		/*asyncGetData = function(){
-			var deffered = $q.defer();
+		if ($scope.seenGuide) {
+			$log.debug('User has completed guide');
+		} else {
+			$log.debug('User has not completed guide');
+			$location.path('/guide');
+			$route.reload();
+		}
 
-			$http({
-				method: 'GET',
-				url: '../scripts/video_data.php',
-				headers: {'Content-Type': contentType}
-			}).
-			success(function(data,status){
-				deffered.resolve(data);
-			}).
-			error(function(data,status){
-				deffered.reject('Failed : ' + status + ' Reason: ' + data);
-			});
+		if (localStorageService.get($scope.userName + 'watchedVideos')) {
+			$location.path('/thanks');
+			$route.reload();
+			return;
+		}
 
-			return deffered.promise;
-
-		};*/
 
 		// Get the list of known words for the user
 		// Get the list of all videos
 		// Based on these two data, create a new data which contains unknown words
 		$scope.init = function() {
-			// Method needed for getting async data... Better approach may be to create factory services
-			/*var promise = asyncGetData();
-			promise.then(function(data){
-				$log.debug('Successfully recieve async data');
-				$scope.videoData = data;
-			}, function(reason) {
-				alert('Failed to receive data : ' + reason);
-			});*/
+			// Method needed for getting async data. This ensures that we only execute the rest of the functions after we get the data.
+
 			var dataPromise = httpVideoDataService.get();
 			dataPromise.then(function(result){
 				$scope.videoData = result.data;
-				$log.debug('Got them data asynchrounsly: %o', result);
+				$log.debug('Got them data asynchrounsly: %o', $scope.videoData);
 
 				var knownWords = {};
-				if ($scope.knownWords = siteData.get('knownWords')) {
-					$log.debug('Got the known words through angualr');
-				} else {
-					$log.debug('Need to write the function to get known words through php');
-					$scope.knownWords = ['Lucid']; // For debug ONLY
-				}
-			
-				$log.debug('My video data is: %o', $scope.videoData);
-				$log.debug('My knownWords is: %o', $scope.knownWords);
-				var maxShow = $scope.numMaxShow($scope.videoData.length, $scope.knownWords.length, maxMax);
-				$scope.total = maxShow;
-				$log.debug('Will show a maximum of : ' + maxShow);
-				$scope.videosToPlay = $scope.createVideoList($scope.videoData, $scope.knownWords, maxShow);
-				$scope.cardsToPlay  = $scope.createFlashCardList($scope.videoData, $scope.knownWords, $scope.videosToPlay, maxShow);
-				$log.debug('The videosToPlay is: %o', $scope.videosToPlay);
-				$log.debug('The cardsToPlay is: %o', $scope.cardsToPlay);
-				$timeout($scope.playVideo,'1000'); // Give a half a second delay before playing the next video
+				var wordPromise = httpKnownWordsService.get($scope.userName);
+				wordPromise.then(function(result) {
+					$scope.knownWords = result.data;
+					$log.debug('My knownWords is: %o', $scope.knownWords);
+
+					var maxShow = $scope.numMaxShow($scope.videoData.length, $scope.knownWords.length, maxMax);
+					$scope.total = maxShow;
+					$log.debug('Will show a maximum of : ' + maxShow);
+					$scope.videosToPlay = $scope.createVideoList($scope.videoData, $scope.knownWords, maxShow);
+					$scope.cardsToPlay  = $scope.createFlashCardList($scope.videoData, $scope.knownWords, $scope.videosToPlay, maxShow);
+					$log.debug('The videosToPlay is: %o', $scope.videosToPlay);
+					$log.debug('The cardsToPlay is: %o', $scope.cardsToPlay);
+					$timeout($scope.playVideo,'1000'); // Give a second delay before playing the next video
+				})
 			})
 		}
 
 		// Get the list of video data from the server using http call
+		/* NO NEED ANYMORE... DELETE
 		$scope.getVideoData = function(){
 			var videoData = {};
-			/*$http({
-				method: 'GET',
-				url: '../scripts/video_data.php',
-				headers: {'Content-Type': contentType}
-			}).
-			success(function(data,status){
-				$log.debug('In getVideoData func. My data is: %o', data);
-				videoData = data;
-			}).
-			error(function(data,status){
-				$log.debug('Cant get data: ' + data);
-				alert('Unable to retrieve video. Please try reloading the page!');
-			});*/
+
 			return $q(function(resolve, reject) {
 				$http({
 					method: 'GET',
@@ -115,9 +92,11 @@
 
 			return videoData;
 		}
+		*/
 
 		// Get the list of the words the user knows (which was submitted in the previous page)
 		//   Either get the words through angualr if avaialble, if not fall back to database
+		/* NO NEED ANYMORE... DELETE
 		$scope.getKnownWords = function(){
 			var knownWords = {};
 			if (knownWords = siteData.get('knownWords')) {
@@ -146,6 +125,7 @@
 			// Return the known words list
 			return knownWords;
 		}
+		*/
 
 		// Figureout the maximum number of videos & flash-cards the user needs to watch
 		//   We want to show an equal # of videos & flash-cards, so we must subtitue the maximum # of available words
@@ -245,7 +225,28 @@
 		// Here we will save the shown videos & flash-card lists separately. 
 		//   This is important as later we will need the data separately to compare the results
 		$scope.saveLists = function() {
+			// Remove some of the previousely set storages
+			// localStorageService.remove($scope.userName + 'knownvideosSubmitted');
+			localStorageService.set($scope.userName + 'watchedVideos', true);
 			$log.debug('Saving the shown videos & flash-card lists');
+			$http({
+				method: 'POST',
+				url: '../scripts/submit_watches.php',
+				data: $.param({
+					'user'    : $scope.userName,
+					'videos'  : $scope.videosToPlay,
+					'flashes' : $scope.cardsToPlay
+				}),
+				headers: {'Content-Type': contentType}
+			}).
+			success(function(data,status){
+				$log.debug('Successfully inserted known words');
+			}).
+			error(function(data,status){
+				$log.debug('Error is: ' + data);
+				alert('An error occured... Please contact SMV support');
+			});
+
 			$location.path('/thanks');
 			$route.reload();
 		}

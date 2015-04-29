@@ -1,4 +1,14 @@
 
+/* 
+	The angular module for the SMV site. 
+	Created by: Nima Sepehr
+	Date: 04/27/2015
+
+	All rights reserved. You may NOT copy or distribute ANY of the code. 
+
+*/
+
+
 var site = angular.module('testSite', ['ngRoute','LocalStorageModule', 'home.controller', 'signup.controller', 'guide.controller','video.controller', 'feedback.controller']);
 
 // Create a service to pass data between controllers
@@ -27,6 +37,35 @@ site.factory('httpVideoDataService', function($http) {
 			return result.data;
 		})
 	};
+	return {
+		get: myData
+	};
+});
+
+// Create a service for getting the known words list. This is for backup in case users reload the page. 
+//    since in angular when the page gets reloaded the data gets lost
+site.factory('httpKnownWordsService', function($http) {
+
+	var myData = function() {
+
+		// if (knownWords = siteData.get('knownWords')) {
+		// 	$log.debug('Got the known words through angualr');
+		// 	return knownWords;
+		// } 
+
+		return $http({method: "GET", url: '../scripts/getknownwords.php?user=nsepehr@gmail.com'})
+			.success(function(result){
+				return result.data;
+			})  
+			.error(function(result, status){
+				//$log.error('Could not get knownvideos. status: ' + status + ' Reason: ' + result);
+				knownWords = ['NONE'];
+				return knownWords;
+			})
+
+		//$log.debug('Done with the known words service');
+	};
+
 	return {
 		get: myData
 	};

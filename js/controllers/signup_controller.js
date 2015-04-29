@@ -6,7 +6,8 @@
 
 	var app = angular.module('signup.controller', []);
 
-	app.controller('SignupFormController', ['$scope', '$http', '$location', '$route', '$log', 'siteData', 'localStorageService', function($scope, $http, $location, $route, $log, siteData, localStorageService) {
+	app.controller('SignupFormController', ['$scope', '$http', '$location', '$route', '$log', 'siteData', 'localStorageService', 
+		function($scope, $http, $location, $route, $log, siteData, localStorageService) {
 		// This hash will contain the form information
 		this.formData = {};
 		$scope.educationList = [

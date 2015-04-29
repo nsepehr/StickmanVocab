@@ -18,7 +18,7 @@ $fields     = array('user');
 $connect = new ConnectMySQL($db_userName, $db_password, $db_host, $db_database);
 
 // Validate the required fields
-$connect->validateFields($_POST, $fields);
+$connect->validateFields($_GET, $fields);
 
 // Test connections to DB
 $connect->connect();
@@ -26,9 +26,12 @@ $connect->connect();
 // Add user using MySQL query
 $knownWordsString = getKnownWords($connect, $fields, $tableName);
 
+// Returned result in in string delimited by '/'. Split it and put in array
+$knownWordsArray = explode('/', $knownWordsString);
+
 // Succesful :)
-echo "Successfully inserted record";
-// print_r($_POST['knownWords']);
+echo json_encode($knownWordsArray);
+
 exit(0);
 
 
@@ -42,13 +45,14 @@ exit(0);
 function getKnownWords($connect, $fields, $table)
 {
     // Sanitize strings to prevent hacks
-    $user     = $connect->sanitizeString($_POST[$fields[0]]);
-    $words    = $_POST[$fields[1]];
+    $user     = $connect->sanitizeString($_GET[$fields[0]]);
 
     // Built the query for grabbing the known words
-    $query = "SELECT `URL`,`NAME` FROM `$table`";
+    $query = "SELECT `knownWords` FROM `$table` WHERE `Email` = '$user'";
 
     $connect->query($query);
+    $results = $connect->getResult();
+    return $results['knownWords'];
 }
 
 //---------------------------------------------------//

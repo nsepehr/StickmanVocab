@@ -4,7 +4,7 @@
 		<div class='navbar-inner'>
 			<div class='container'>
 				<div class="navbar-header">
-					<a class='navbar-brand' ui-sref='home'>
+					<a class='navbar-brand' href='#/home'>
 						StickMan Vocab
 					</a>
 				</div>
@@ -16,9 +16,14 @@
 	<div class="thanks">
 		<div class="container text-center">
 			<div class="row">
+				<div class="col-sm-6 pull-left text-center">
+					<img ng-src="img/stickman-04.png" height="180">
+				</div>
+			</div>
+			<div class="row">
 
 				<h1>Thank You for Sticking With Us</h1>
-				<form class="col-sm-6 col-sm-offset-3" method="post" name="feebackForm" ng-controller="FeedbackController as feedbackCtrl" ng-init="setFinishedCookies() && getVideos()" ng-submit="feedbackCtrl.submitKnownVideos() || feedbackCtrl.submitFeedback()" novalidate>
+				<form class="col-sm-6 col-sm-offset-3" method="post" name="feebackForm" ng-controller="FeedbackController as feedbackCtrl" ng-init="setFinishedCookies() && getVideos()" ng-submit="feedbackCtrl.submitFeedback()" novalidate>
 
 					<!-- There's a problem with the approach of having known video list on the feedback page
 					        ... what if the users didn't want to send a feedback? -->

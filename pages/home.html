@@ -6,14 +6,17 @@
 		<!-- Navigation Bar -->
 		<nav class="container-fluid hidden-sm hidden-xs">
 			<div class="row">
-				<a href='#/signup' class='btn' id="{{startBtnID}}">{{startHereMsg}}</a>
+				<a href={{startUrl}} class='btn' id="{{startBtnID}}">{{startHereMsg}}</a>
+			</div>
+			<div class="row">
+				<p><a href='#/signup' ng-show="showNotUser">Not {{userName}} ?</a></p>
 			</div>
 		</nav>
 		<!-- Main Text -->
 		<div class="intro-text">
 			<h1>Stickman Vocab</h1>
 			<h2>A better way to enhance your <strong class="yellow">vocabulary!</strong></h2>
-			<!-- <a href="#/signup" class="btn">Start Now</a>  Replace with aroow going down to show the bottom portion of site--> 
+			<a href="#/signup" class="btn">Start Now</a> 
 		</div>
 	</section>
 
@@ -80,11 +83,13 @@
 			<div class="row text-center">
 				<!-- <a ui-sref="signup" class="btn">Start Now</a> Replace with an arrow going down to show rest of the page -->
 			</div>
+			<!-- This image should be on the feedback page
 			<div class="row">
 				<div class="col-sm-6 col-sm-offset-6 pull-right text-center">
 					<img ng-src="img/stickman-04.png" height="180">
 				</div>
 			</div>
+			-->
 		</div>
 	</section>
 
