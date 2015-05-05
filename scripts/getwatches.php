@@ -7,7 +7,7 @@ require_once 'login_dev.php';
 require_once 'Connect_MySQL.php'; 
 
 // Form variables
-$tableName  = 'knownwords';
+$tableName  = 'watches';
 $fields     = array('user');
 
 
@@ -24,13 +24,18 @@ $connect->validateFields($_GET, $fields);
 $connect->connect();
 
 // Add user using MySQL query
-$knownWordsString = getKnownWords($connect, $fields, $tableName);
+$watchListArray = getWatchList($connect, $fields, $tableName);
+$videoListString = $watchListArray['Videos'];
+$flashListString = $watchListArray['Flashes'];
 
 // Returned result in in string delimited by '/'. Split it and put in array
-$knownWordsArray = explode('/', $knownWordsString);
+$videoListArray = explode('/', $videoListString);
+$flashListArray = explode('/', $flashListString);
+$returnList['videos']  = $videoListArray;
+$returnList['flashes'] = $flashListArray;
 
 // Succesful :)
-echo json_encode($knownWordsArray);
+echo json_encode($returnList);
 
 exit(0);
 
@@ -42,17 +47,17 @@ exit(0);
 //---------------------------------------------------//
 // Add the user who filled the form to the MySQL database table
 //---------------------------------------------------//
-function getKnownWords($connect, $fields, $table)
+function getWatchList($connect, $fields, $table)
 {
     // Sanitize strings to prevent hacks
     $user     = $connect->sanitizeString($_GET[$fields[0]]);
 
     // Built the query for grabbing the known words
-    $query = "SELECT `knownWords` FROM `$table` WHERE `Email` = '$user'";
+    $query = "SELECT `Videos`,`Flashes` FROM `$table` WHERE `Email` = '$user'";
 
     $connect->query($query);
     $results = $connect->getResult();
-    return $results['knownWords'];
+    return $results;
 }
 
 //---------------------------------------------------//

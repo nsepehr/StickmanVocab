@@ -45,24 +45,10 @@ function addWatches($connect, $fields, $table)
     $videos  = $_POST[$fields[1]];
     $flashes = $_POST[$fields[2]]; 
 
-    if (count($videos) > 1) {
-        $sqlVideo = implode('/', $videos);
-    } else if (count($videos) == 1) {
-        $sqlVideo = $videos['0'];
-    } else {
-        $sqlVideo = 'NONE';
-    }
-
-    if (count($flashes) > 1) {
-        $sqlFlashes = implode('/', $flashes);
-    } else if (count($flashes) == 1) {
-        $sqlFlashes = $flashes['0'];
-    } else {
-        $sqlFlashes = 'NONE';
-    }
+    $sqlVideo = implode('/', $videos);
+    $sqlFlashes = implode('/', $flashes);
     
 
-    // Built the query for inserting the user data
     $query = "INSERT INTO `$table` (`ID`, `Email`, `videos`, `flashes`) 
             VALUES (NULL, '$user', '$sqlVideo', '$sqlFlashes')";
     $connect->query($query);

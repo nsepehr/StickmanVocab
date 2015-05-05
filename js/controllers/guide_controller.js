@@ -10,22 +10,25 @@
 	app.controller('GuideController', ['localStorageService', '$location', '$route', '$scope', '$log', 'siteData', '$http',
 		function(localStorageService, $location, $route, $scope, $log, siteData, $http) {
 		
-		$scope.videoData  = {};
+		$scope.videoData = {};
+		$scope.flashData = {};
 		$scope.words = {
-			know: []
+			video: [],
+			flash: []
 		}
 
 		var submitBtn = "submitBtn";
+		$scope.mustSelectNum = 7;
 
-		 $scope.userName  = localStorageService.get('Email')
-		 $scope.seenGuide = localStorageService.get($scope.userName + 'knownvideosSubmitted')
+		$scope.userName  = localStorageService.get('Email')
+		$scope.seenGuide = localStorageService.get($scope.userName + 'knownvideosSubmitted')
 
 		// Initial functions to run
 		$scope.init = function() {
 			// Check to see if the user has signed up
 			$scope.checkSignUp();
 			// Get the video data which gets used in creating the checkboxes for known words 
-			$scope.getVideoData();
+			$scope.getData();
 			// Check if user previously viewed the guide and submitted known words
 			$scope.checkKnownWordsSubmitted();
 		}
@@ -55,7 +58,7 @@
 		}
 
 		// Get the video data from the mySQL data base by calling the php script
-		$scope.getVideoData = function(){
+		$scope.getData = function(){
 			$http({
 				method: 'GET',
 				url: '../scripts/video_data.php',
@@ -63,7 +66,8 @@
 			}).
 			success(function(data,status){
 				$log.debug('In getVideoData func. My data is: %o', data);
-				$scope.videoData = data;
+				$scope.videoData = data['videos'];
+				$scope.flashData = data['flashes'];
 			}).
 			error(function(data,status){
 				alert('Unable to retrieve video. Please try reloading page!');
@@ -72,34 +76,32 @@
 
 		// Submit the words the user knows to the data base
 		//   If the user has already seen the guide and submitted known videos, then skip submittion.
-		$scope.submitKnownWords = function(){
+		$scope.submitWatches = function(){
+			$log.debug('My words list is: %o', $scope.words);
 			if ($scope.seenGuide) {
 				$location.path('/video');
 				$route.reload();
 				return;
-			} else if ($scope.words.know.length >= $scope.videoData.length - 1) {
-				alert('Can NOT qualify you for this test... You know too many words :)');
+			} else if ($scope.words.video.length != $scope.mustSelectNum || $scope.words.flash.length != $scope.mustSelectNum) {
+				alert('You MUST select ' + $scope.mustSelectNum + ' words from each list');
 				return;
-			}
-
-			if ($scope.words.know.length == 0) {
-				// Make the list at least have one dummy value
-				$scope.words.know.push('NONE');
 			}
 
 			$http({
 				method: 'POST',
-				url: '../scripts/knownwords.php',
+				url: '../scripts/submit_watches.php',
 				data: $.param({
-					'user'        : $scope.userName,
-					'knownWords'  : $scope.words.know
+					'user'    : $scope.userName,
+					'videos'  : $scope.words.video,
+					'flashes' : $scope.words.flash
 				}),
 				headers: {'Content-Type': contentType}
 			}).
 			success(function(data,status){
 				$log.debug('Successfully inserted known words');
 				localStorageService.set($scope.userName + 'knownvideosSubmitted', true);
-				siteData.set('knownWords', $scope.words.know);
+				siteData.set('videosToWatch', $scope.words.video);
+				siteData.set('flashesToWatch', $scope.words.flash);
 				$location.path('/video');
 				$route.reload();
 			}).

@@ -15,46 +15,35 @@
 	<!-- Content -->
 	<div class="guide">
 		<div class="container-fluid">
+			<form method="post" name="unknownVideoForm" ng-submit="submitWatches()" novalidate>
 			<div class="row">
 				<div class="col-sm-6">
 					<h1>Instruction</h1>
 					<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam volutpat a justo ut ultricies. Suspendisse suscipit luctus mauris, eu bibendum tortor lacinia non. Ut porttitor risus et augue aliquet gravida. Nullam tincidunt dui at arcu tempor rutrum. Cras vel orci sit amet dui condimentum laoreet id at nisi. Fusce sed tempus orci. Cras consequat ultrices mi, nec tempor urna consectetur non. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam eu ligula leo. Vivamus vulputate tellus at est gravida, sed mattis nibh sagittis. Vivamus et ex in ligula imperdiet vehicula sed eget sem.</p>
 				</div>
-				<form method="post" name="unknownVideoForm" ng-submit="submitKnownWords()" novalidate>
+			</div>
+			<div class="row">
 					<div class="col-sm-6">
-						<h3>Please select the words you don't know:</h3>
+						<h3>Please select {{mustSelectNum}} words from this list</h3>
 						<div class="row">
 								<div class="col-sm-4" ng-repeat="video in videoData">
-									<input type="checkbox" id="{{video.NAME}}" checklist-model="words.know" checklist-value="video.NAME">
+									<input type="checkbox" id="{{video.NAME}}" checklist-model="words.video" checklist-value="video.NAME">
 									<label>{{video.NAME}}</label>
 								</div>
-								<!-- Just keep them for reference for now
-								<div class="col-sm-4">
-									<input type="checkbox" name="word2" required ng-model="knownVideo.word2">
-									<label>Word No 2</label>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<h3>Please select another {{mustSelectNum}} words from this list</h3>
+						<div class="row">
+								<div class="col-sm-4" ng-repeat="flash in flashData">
+									<input type="checkbox" id="{{flash.NAME}}" checklist-model="words.flash" checklist-value="flash.NAME">
+									<label>{{flash.NAME}}</label>
 								</div>
-								<div class="col-sm-4">
-									<input type="checkbox" name="word3" required ng-model="knownVideo.word3">
-									<label>Word No 3</label>
-								</div>
-								<div class="col-sm-4">
-									<input type="checkbox" name="word4" required ng-model="knownVideo.word4">
-									<label>Word No 4</label>
-								</div>
-								<div class="col-sm-4">
-									<input type="checkbox" name="word5" required ng-model="knownVideo.word5">
-									<label>Word No 5</label>
-								</div>
-								<div class="col-sm-4">
-									<input type="checkbox" name="word6" required ng-model="knownVideo.word6">
-									<label>Word No 6</label>
-								</div>
-								-->
 						</div>
 					</div>
 					<div class="row text-center"><input name="submitBtn" id="submitBtn" type="submit" value="Continue" class="row text-center btn"></div>
-				</form>
 			</div>
+			</form>
 				<!-- <div class="row text-center"><a class="btn" href="#/video">Start Now</a></div> -->
 		</div>
 	</div>

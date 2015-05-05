@@ -9,7 +9,8 @@
 */
 
 
-var site = angular.module('testSite', ['ngRoute','LocalStorageModule', 'home.controller', 'signup.controller', 'guide.controller','video.controller', 'feedback.controller']);
+var site = angular.module('testSite', ['ngRoute','LocalStorageModule', 'home.controller', 
+	'signup.controller', 'guide.controller','video.controller', 'feedback.controller']);
 
 // Create a service to pass data between controllers
 site.factory('siteData', function() {
@@ -44,23 +45,23 @@ site.factory('httpVideoDataService', function($http) {
 
 // Create a service for getting the known words list. This is for backup in case users reload the page. 
 //    since in angular when the page gets reloaded the data gets lost
-site.factory('httpKnownWordsService', function($http) {
+site.factory('httpWatchesService', function($http) {
 
-	var myData = function() {
+	var myData = function(user) {
 
 		// if (knownWords = siteData.get('knownWords')) {
 		// 	$log.debug('Got the known words through angualr');
 		// 	return knownWords;
 		// } 
 
-		return $http({method: "GET", url: '../scripts/getknownwords.php?user=nsepehr@gmail.com'})
+		return $http({method: "GET", url: '../scripts/getwatches.php?user='+user})
 			.success(function(result){
 				return result.data;
 			})  
 			.error(function(result, status){
 				//$log.error('Could not get knownvideos. status: ' + status + ' Reason: ' + result);
-				knownWords = ['NONE'];
-				return knownWords;
+				alert('Failed to grab data. Please try reloading the page! If issue continues contact support');
+				return;
 			})
 
 		//$log.debug('Done with the known words service');
