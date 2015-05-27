@@ -2,7 +2,7 @@
 
 (function() {
 
-	var app = angular.module('guide.controller', ['checklist-model']);
+	var app = angular.module('guide.controller', ['checklist-model', 'ui.select', 'ngSanitize']);
 
 	// Variables specific to these controllers
 	contentType = 'application/x-www-form-urlencoded';
@@ -10,7 +10,18 @@
 	app.controller('GuideController', ['localStorageService', '$location', '$route', '$scope', '$log', 'siteData', '$http',
 		function(localStorageService, $location, $route, $scope, $log, siteData, $http) {
 		
-		$scope.videoData = {};
+		// Testing ui-select
+		$scope.report = {};
+		$scope.reports = [
+			{ id : 'one', name : 'California'},
+			{ id : 'two', name : 'Georgia'}
+		];
+
+
+		//$scope.videoData = {};
+		$scope.videoData = [];
+		$scope.video = {}; 
+		
 		$scope.flashData = {};
 		$scope.words = {
 			video: [],

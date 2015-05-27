@@ -32,6 +32,9 @@
 		// Controls the flash card show vs video
 		$scope.showFlash = false;
 
+		// Shows the video title and video out of ... Need to hide the title on the opening video
+		$scope.showTitle = false;
+
 		$scope.userName  = localStorageService.get('Email');
 		$scope.seenGuide = localStorageService.get($scope.userName + 'knownvideosSubmitted')
 
@@ -78,7 +81,13 @@
 						angular.element('#'+srcWebID).attr("src", 'https://s3-us-west-1.amazonaws.com/smvtestvideotranscoded/Opening_Scene.mp4'); 
 						angular.element('#'+videoID).get(0).load();
 						angular.element('#'+videoID).get(0).play();
-					},'1000'); // Give a second delay before playing the next video
+						angular.element('#'+videoID).get(0).onended = function(e) {
+							if ($scope.videoIndex == 0) {
+								$scope.showTitle = true;
+								$scope.changeVideo('next');
+							}
+						};
+					},'500'); // Give a second delay before playing the next video
 				})
 			})
 		}

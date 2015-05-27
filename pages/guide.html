@@ -26,10 +26,18 @@
 					<div class="col-sm-6">
 						<h3>Please select {{mustSelectNum}} words from this list</h3>
 						<div class="row">
+								<!-- OLD checkbox model
 								<div class="col-sm-4" ng-repeat="video in videoData">
 									<input type="checkbox" id="{{video.NAME}}" checklist-model="words.video" checklist-value="video.NAME">
 									<label>{{video.NAME}}</label>
 								</div>
+								-->
+								<ui-select multiple ng-model="video.selected">
+									<ui-select-match placeholder="Select your word...">{{$item.NAME}}</ui-select-match>
+									<ui-select-choices repeat="video in videoData | filter: $select.search">
+										<div ng-bind-html="video.NAME | highlight $select.search"></div>
+									</ui-select-choices>
+								</ui-select>
 						</div>
 					</div>
 					<div class="col-sm-6">
@@ -44,6 +52,17 @@
 					<div class="row text-center"><input name="submitBtn" id="submitBtn" type="submit" value="Continue" class="row text-center btn"></div>
 			</div>
 			</form>
+			<!-- ui-select working example
+			<div class="row">
+				<p>Select report is: {{report.selected}}</p>
+ 				<ui-select multiple ng-model="report.selected">
+ 					<ui-select-match placeholder="Select your report...">{{$item.name}}</ui-select-match>
+ 					<ui-select-choices repeat="report in reports | filter: $select.search">
+        				<div ng-bind-html="report.name | highlight: $select.search"></div>
+    				</ui-select-choices>
+				</ui-select>
+			</div>
+			-->
 				<!-- <div class="row text-center"><a class="btn" href="#/video">Start Now</a></div> -->
 		</div>
 	</div>

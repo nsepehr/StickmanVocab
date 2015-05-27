@@ -20,11 +20,11 @@
 	<div class="video text-center container-fluid" ng-init="init()">
 		<div class="row" ng-show="!showFlash">
 			<div class="col-sm-2">
-				<i class="pull-right fa fa-3x fa-chevron-left" id="backward-btn" ng-click="changeVideo('prev')"></i>
+				<i class="pull-right fa fa-3x fa-chevron-left" id="backward-btn" ng-click="changeVideo('prev')" ng-show="showTitle"></i>
 			</div>
 			<div class="col-sm-8">
-				<h3 class="text-left">{{videoTitle}}</h3>
-				<h4 class="text-right mutted">Video {{videoIndex}} out of {{videoTotal}}</h4>
+				<h3 class="text-left" ng-show="showTitle">{{videoTitle}}</h3>
+				<h4 class="text-right mutted" ng-show="showTitle">Video {{videoIndex}} out of {{videoTotal}}</h4>
 				<div>
 					<video controls id="video-id">
 						<source src="" type="video/mp4" id="web-vid-src">
@@ -36,12 +36,12 @@
 				</div>
 			</div>
 			<div class="col-sm-2">
-				<i class="pull-left fa fa-3x fa-chevron-right" id="forward-btn"  ng-click="changeVideo('next')"></i>
+				<i class="pull-left fa fa-3x fa-chevron-right" id="forward-btn"  ng-click="changeVideo('next')" ng-show="showTitle"></i>
 			</div>
 		</div>
 		<div class="row" ng-show="showFlash">
 			<div class="col-sm-2">
-				<i class="pull-right fa fa-3x fa-chevron-left" id="backward-btn" ng-click="changeFlash('prev')"></i>
+				<i class="pull-right fa fa-3x fa-chevron-left" id="backward-btn" ng-click="changeFlash('prev')" ng-show="showTitle"></i>
 			</div>
 			<div class="col-sm-8">
 				<h3 class="text-left">{{flashTitle}}</h3>
