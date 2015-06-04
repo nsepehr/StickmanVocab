@@ -12,6 +12,7 @@
 var site = angular.module('testSite', ['ngRoute', 'LocalStorageModule', 'home.controller', 
 	'signup.controller', 'guide.controller','video.controller', 'feedback.controller', 'quiz.controller']);
 
+
 // Create a service to pass data between controllers
 site.factory('siteData', function() {
 	

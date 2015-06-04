@@ -9,30 +9,22 @@
 
 	app.controller('GuideController', ['localStorageService', '$location', '$route', '$scope', '$log', 'siteData', '$http',
 		function(localStorageService, $location, $route, $scope, $log, siteData, $http) {
-		
-		// Testing ui-select
-		$scope.report = {};
-		$scope.reports = [
-			{ id : 'one', name : 'California'},
-			{ id : 'two', name : 'Georgia'}
-		];
 
 
 		//$scope.videoData = {};
 		$scope.videoData = [];
-		$scope.video = {}; 
-		
-		$scope.flashData = {};
-		$scope.words = {
-			video: [],
-			flash: []
-		}
+		$scope.vidSelect = {};
+
+		//$scope.flashData = {};
+		$scope.flashData = [];
+		$scope.flashSelect = {};
 
 		var submitBtn = "submitBtn";
 		$scope.mustSelectNum = 7;
 
 		$scope.userName  = localStorageService.get('Email')
 		$scope.seenGuide = localStorageService.get($scope.userName + 'knownvideosSubmitted')
+
 
 		// Initial functions to run
 		$scope.init = function() {
@@ -88,13 +80,27 @@
 		// Submit the words the user knows to the data base
 		//   If the user has already seen the guide and submitted known videos, then skip submittion.
 		$scope.submitWatches = function(){
-			$log.debug('My words list is: %o', $scope.words);
+			var videos = []; var flashes = [];
+			for (var i = 0; i < $scope.vidSelect.selected.length; i++) {
+				//$log.debug('My item for vidSelect is: ');
+				//$log.debug($scope.vidSelect.selected[i]);
+				obj = $scope.vidSelect.selected[i];
+				videos[i] = obj.NAME;
+			};
+
+			for (var i = 0; i < $scope.flashSelect.selected.length; i++) {
+				//$log.debug('My item for vidSelect is: ');
+				//$log.debug($scope.vidSelect.selected[i]);
+				obj = $scope.flashSelect.selected[i];
+				flashes[i] = obj.NAME;
+			};
+
+
+			$log.debug('My video list is: %o', videos);
+			$log.debug('My flash list is: %o', flashes);
 			if ($scope.seenGuide) {
 				$location.path('/video');
 				$route.reload();
-				return;
-			} else if ($scope.words.video.length != $scope.mustSelectNum || $scope.words.flash.length != $scope.mustSelectNum) {
-				alert('You MUST select ' + $scope.mustSelectNum + ' words from each list');
 				return;
 			}
 
@@ -103,16 +109,16 @@
 				url: '../scripts/submit_watches.php',
 				data: $.param({
 					'user'    : $scope.userName,
-					'videos'  : $scope.words.video,
-					'flashes' : $scope.words.flash
+					'videos'  : videos,
+					'flashes' : flashes
 				}),
 				headers: {'Content-Type': contentType}
 			}).
 			success(function(data,status){
 				$log.debug('Successfully inserted known words');
 				localStorageService.set($scope.userName + 'knownvideosSubmitted', true);
-				siteData.set('videosToWatch', $scope.words.video);
-				siteData.set('flashesToWatch', $scope.words.flash);
+				siteData.set('videosToWatch', videos);
+				siteData.set('flashesToWatch', flashes);
 				$location.path('/video');
 				$route.reload();
 			}).

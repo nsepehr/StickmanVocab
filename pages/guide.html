@@ -25,6 +25,7 @@
 			<div class="row">
 					<div class="col-sm-6">
 						<h3>Please select {{mustSelectNum}} words from this list</h3>
+						<p ng-show="vidSelect.selected.length > mustSelectNum">You have selected more than {{mustSelectNum}} words</p>
 						<div class="row">
 								<!-- OLD checkbox model
 								<div class="col-sm-4" ng-repeat="video in videoData">
@@ -32,24 +33,28 @@
 									<label>{{video.NAME}}</label>
 								</div>
 								-->
-								<ui-select multiple ng-model="video.selected">
+								<ui-select multiple ng-model="vidSelect.selected">
 									<ui-select-match placeholder="Select your word...">{{$item.NAME}}</ui-select-match>
 									<ui-select-choices repeat="video in videoData | filter: $select.search">
-										<div ng-bind-html="video.NAME | highlight $select.search"></div>
+										<div ng-bind-html="video.NAME | highlight: $select.search"></div>
 									</ui-select-choices>
 								</ui-select>
 						</div>
 					</div>
 					<div class="col-sm-6">
 						<h3>Please select another {{mustSelectNum}} words from this list</h3>
+						<p ng-show="flashSelect.selected.length > mustSelectNum">You have selected more than {{mustSelectNum}} words</p>
 						<div class="row">
-								<div class="col-sm-4" ng-repeat="flash in flashData">
-									<input type="checkbox" id="{{flash.NAME}}" checklist-model="words.flash" checklist-value="flash.NAME">
-									<label>{{flash.NAME}}</label>
-								</div>
+								<ui-select multiple ng-model="flashSelect.selected">
+									<ui-select-match placeholder="Select your word...">{{$item.NAME}}</ui-select-match>
+									<ui-select-choices repeat="flash in flashData | filter: $select.search">
+										<div ng-bind-html="flash.NAME | highlight: $select.search"></div>
+									</ui-select-choices>
+								</ui-select>
 						</div>
 					</div>
-					<div class="row text-center"><input name="submitBtn" id="submitBtn" type="submit" value="Continue" class="row text-center btn"></div>
+					<div class="row text-center"><input name="submitBtn" id="submitBtn" type="submit" value="Continue" class="row text-center btn" 
+						ng-disabled="vidSelect.selected.length != mustSelectNum || flashSelect.selected.length != mustSelectNum"></div>
 			</div>
 			</form>
 			<!-- ui-select working example
