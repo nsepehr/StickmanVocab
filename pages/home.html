@@ -2,21 +2,19 @@
 <div id="home">
 	<!-- Intro Section -->
 	<section class="intro" ng-init="checkCookie()">
-		<span class="stickman-hanging"><img ng-src="img/stickman-01.png"></span>
+		<span class="stickman-hanging hidden-xs"><img ng-src="img/stickman-01.png"></span>
 		<!-- Navigation Bar -->
-		<nav class="container-fluid hidden-sm hidden-xs">
+		<nav class="container-fluid">
 			<div class="row">
 				<a href={{startUrl}} class='btn' id="{{startBtnID}}">{{startHereMsg}}</a>
-			</div>
-			<div class="row">
-				<p><a href='#/signup' ng-show="showNotUser">Not {{userName}} ?</a></p>
+				<a href='#/signup' ng-show="showNotUser">Not {{userName}} ?</a>
 			</div>
 		</nav>
 		<!-- Main Text -->
 		<div class="intro-text">
 			<h1>Stickman Vocab</h1>
 			<h2>A better way to enhance your <strong class="yellow">vocabulary!</strong></h2>
-			<a href="#/signup" class="btn">Start Now</a> 
+			<a href="#/signup" class="btn">Start Now</a>
 		</div>
 	</section>
 
@@ -41,10 +39,9 @@
 				</div>
 			</div>
 			<div class="row">
-				<!-- <a href="#/signup" class="btn">Start Now</a> Replace with an arrow down to show rest of the page -->
-			</div>
-			<div class="row">
-				<img class="pull-left" ng-src="img/stickman-05.png" height="100">
+				<div class="text-center">
+					<img ng-src="img/stickman-05.png" height="100">
+				</div>
 			</div>
 		</div>
 	</section>
@@ -60,12 +57,12 @@
 					<h2 class="title">Exigent</h2>
 					<p>Curabitur vulputate mi mi, vitae congue libero volutpat quis. Donec bibendum sed ipsum et rhoncus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum suscipit quam a enim malesuada, sit amet convallis nulla efficitur. Aliquam ac est nec sapien accumsan scelerisque et pulvinar metus.</p>
 				</div>
-				<div class="text-left hidden-xs col-sm-6">
+				<div class="text-left col-sm-6">
 					<img ng-src="img/arrow-left-right.png" height="200">
 				</div>
 			</div>
 			<div class="row text-left">
-				<div class="text-right hidden-xs col-sm-6">
+				<div class="text-right col-sm-6">
 					<img ng-src="img/arrow-right-left.png" height="200">
 				</div>
 				<div class="col-sm-6">
@@ -78,18 +75,7 @@
 					<h2 class="title">Necessary</h2>
 					<p>Curabitur vulputate mi mi, vitae congue libero volutpat quis. Donec bibendum sed ipsum et rhoncus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum suscipit quam a enim malesuada, sit amet convallis nulla efficitur.</p>
 				</div>
-				
 			</div>
-			<div class="row text-center">
-				<!-- <a ui-sref="signup" class="btn">Start Now</a> Replace with an arrow going down to show rest of the page -->
-			</div>
-			<!-- This image should be on the feedback page
-			<div class="row">
-				<div class="col-sm-6 col-sm-offset-6 pull-right text-center">
-					<img ng-src="img/stickman-04.png" height="180">
-				</div>
-			</div>
-			-->
 		</div>
 	</section>
 

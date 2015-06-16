@@ -20,21 +20,30 @@
 	<!-- Content -->
 	<div class="text-center quiz container">
 		<div class="row">
-			<div class="col-sm-8 col-sm-offset-2">
-				<div>
-					<h4 class="text-left">Question 1 out of 10</h4>
-				</div>
-				<div class='jumbotron video-player'>
-					Some Words Here
-				</div>
-				<div class="">
-					<div class="yes">
-						<a href="">I did know this word</a>
+			<div class="col-sm-2">
+				<i class="pull-right fa fa-3x fa-chevron-left" id="backward-btn" ></i>
+			</div>
+			<div class="col-sm-8">
+				<div class="quiz-counter">1 out of 10</div>
+				<div class="card">
+					<div class="quiz-content">
+						<div class="quiz-question">Question goes here?</div>
+						<div class="quiz-answers">
+							<div><input type="radio"> Answer 1</div>
+							<div><input type="radio"> Answer 2</div>
+							<div><input type="radio"> Answer 3</div>
+							<div><input type="radio"> Answer 4</div>
+							<div><input type="radio"> Answer 5</div>
+						</div>
 					</div>
-					<div class="no">
-						<a href="">I didn't know this word</a>
-					</div>
+					
 				</div>
+				<!-- It only shows up on mobile -->
+				<div ng-click="changeFlash('prev')" class="pull-left previous">Previous</div>
+				<div ng-click="changeFlash('next')" class="pull-right next">Next</div>
+			</div>
+			<div class="col-sm-2">
+				<i class="pull-left fa fa-3x fa-chevron-right" id="forward-btn"></i>
 			</div>
 		</div>
 	</div>

@@ -23,8 +23,8 @@
 				<i class="pull-right fa fa-3x fa-chevron-left" id="backward-btn" ng-click="changeVideo('prev')" ng-show="showTitle"></i>
 			</div>
 			<div class="col-sm-8">
-				<h3 class="text-left" ng-show="showTitle">{{videoTitle}}</h3>
-				<h4 class="text-right mutted" ng-show="showTitle">Video {{videoIndex}} out of {{videoTotal}}</h4>
+				<div class="video-title" ng-show="showTitle">{{videoTitle}}</div>
+				<div class="video-counter" ng-show="showTitle">Video {{videoIndex}} out of {{videoTotal}}</div>
 				<div>
 					<video controls id="video-id">
 						<source src="" type="video/mp4" id="web-vid-src">
@@ -34,6 +34,9 @@
 						Your browser does not support the video tag.
 					</video> 
 				</div>
+				<!-- It only shows up on mobile -->
+				<div ng-click="changeVideo('prev')" class="pull-left previous">Previous</div>
+				<div ng-click="changeVideo('next')" class="pull-right next">Next</div>
 			</div>
 			<div class="col-sm-2">
 				<i class="pull-left fa fa-3x fa-chevron-right" id="forward-btn"  ng-click="changeVideo('next')" ng-show="showTitle"></i>
@@ -44,11 +47,14 @@
 				<i class="pull-right fa fa-3x fa-chevron-left" id="backward-btn" ng-click="changeFlash('prev')" ng-show="showTitle"></i>
 			</div>
 			<div class="col-sm-8">
-				<h3 class="text-left">{{flashTitle}}</h3>
-				<h4 class="text-right mutted">Flash-card {{flashIndex}} out of {{flashTotal}}</h4>
-				<div>
-					<p>{{flashDefinition}}</p>
+				<div class="flash-title">{{flashTitle}}</div>
+				<div class="flash-counter">Flash-card {{flashIndex}} out of {{flashTotal}}</div>
+				<div class="card">
+					<div class="flashcard-content">{{flashDefinition}}</div>
 				</div>
+				<!-- It only shows up on mobile -->
+				<div ng-click="changeFlash('prev')" class="pull-left previous">Previous</div>
+				<div ng-click="changeFlash('next')" class="pull-right next">Next</div>
 			</div>
 			<div class="col-sm-2">
 				<i class="pull-left fa fa-3x fa-chevron-right" id="forward-btn"  ng-click="changeFlash('next')"></i>
