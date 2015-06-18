@@ -44,6 +44,18 @@ site.factory('httpVideoDataService', function($http) {
 	};
 });
 
+// Create a service for calling the video data php to get the video data needed
+site.factory('httpQuizDataService', function($http) {
+	var myData = function() {
+		return $http({method: "GET", url: '../scripts/getquizdata.php'}).success(function(result){
+			return result.data;
+		})
+	};
+	return {
+		get: myData
+	};
+});
+
 // Create a service for getting the known words list. This is for backup in case users reload the page. 
 //    since in angular when the page gets reloaded the data gets lost
 site.factory('httpWatchesService', function($http) {

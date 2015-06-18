@@ -1,4 +1,4 @@
-<div class="full-height">
+<div class="full-height" ng-init="init()">
 	
 	<!-- Navigation -->
 	<nav class='navbar navbar-default' role='navigation'>
@@ -10,42 +10,46 @@
 					</a>
 				</div>
 				<ul class='nav navbar-nav navbar-right'>
-					<li><a class="yellow" ui-sref="video">Back</a></li>
-					<li><a class="yellow" ui-sref="thanks">Next</a></li>
+					<li><a class="yellow" href='#/home'>Back</a></li>
 				</ul>
 			</div>
 		</div>
 	</nav>
 
 	<!-- Content -->
+	<form method="post" name="quizAnswerForm" class="form-horizontal" ng-submit="nextQuiz()" novalidate>
 	<div class="text-center quiz container">
 		<div class="row">
 			<div class="col-sm-2">
-				<i class="pull-right fa fa-3x fa-chevron-left" id="backward-btn" ></i>
+				<!-- <i class="pull-right fa fa-3x fa-chevron-left" id="backward-btn" ></i> -->
 			</div>
 			<div class="col-sm-8">
-				<div class="quiz-counter">1 out of 10</div>
+				<div class="quiz-counter">{{quizNum}} out of {{watches.length}}</div>
 				<div class="card">
 					<div class="quiz-content">
-						<div class="quiz-question">Question goes here?</div>
+						<div class="quiz-question">{{Question}}</div>
 						<div class="quiz-answers">
-							<div><input type="radio"> Answer 1</div>
-							<div><input type="radio"> Answer 2</div>
-							<div><input type="radio"> Answer 3</div>
-							<div><input type="radio"> Answer 4</div>
-							<div><input type="radio"> Answer 5</div>
+							<div><input type="radio" ng-model="chosen" value="A">{{choiceA}}</div>
+							<div><input type="radio" ng-model="chosen" value="B">{{choiceB}}</div>
+							<div><input type="radio" ng-model="chosen" value="C">{{choiceC}}</div>
+							<div><input type="radio" ng-model="chosen" value="D">{{choiceD}}</div>
+							<div><input type="radio" ng-model="chosen" value="E">{{choiceE}}</div>
 						</div>
 					</div>
 					
 				</div>
 				<!-- It only shows up on mobile -->
-				<div ng-click="changeFlash('prev')" class="pull-left previous">Previous</div>
+				<!-- <div ng-click="changeFlash('prev')" class="pull-left previous">Previous</div> -->
 				<div ng-click="changeFlash('next')" class="pull-right next">Next</div>
 			</div>
-			<div class="col-sm-2">
-				<i class="pull-left fa fa-3x fa-chevron-right" id="forward-btn"></i>
-			</div>
+				<div class="form-group">
+					<label class="col-sm-10 control-label">
+					<!-- Enables the submit button when all the required fields have been validated -->
+						<input type="submit" class="pull-right fa fa-3x fa-chevron-right" id="forward-btn">
+					</label>
+				</div>
 		</div>
 	</div>
+	</form>
 
 </div>

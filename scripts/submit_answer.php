@@ -7,8 +7,8 @@ require_once 'login_dev.php';
 require_once 'Connect_MySQL.php'; 
 
 // Form variables
-$tableName  = 'watches';
-$fields     = array('user' ,'videos', 'flashes', 'date');
+$tableName  = 'results';
+$fields     = array('user' ,'word', 'answer');
 
 
 ////////////////////////////////////////////////////
@@ -24,7 +24,7 @@ $connect->validateFields($_POST, $fields);
 $connect->connect();
 
 // Add user using MySQL query
-addWatches($connect, $fields, $tableName);
+addAnswer($connect, $fields, $tableName);
 
 // Succesful :)
 echo "Successfully inserted record";
@@ -39,19 +39,15 @@ exit(0);
 //---------------------------------------------------//
 // Add the user who filled the form to the MySQL database table
 //---------------------------------------------------//
-function addWatches($connect, $fields, $table)
+function addAnswer($connect, $fields, $table)
 {
     $user    = $_POST[$fields[0]];
-    $videos  = $_POST[$fields[1]];
-    $flashes = $_POST[$fields[2]];
-    $date    = $_POST[$fields[3]];
-
-    $sqlVideo = implode('/', $videos);
-    $sqlFlashes = implode('/', $flashes);
+    $word    = $_POST[$fields[1]];
+    $answer  = $_POST[$fields[2]]; 
     
 
-    $query = "INSERT INTO `$table` (`ID`, `Email`, `videos`, `flashes`, `date`) 
-            VALUES (NULL, '$user', '$sqlVideo', '$sqlFlashes', '$date')";
+    $query = "INSERT INTO `$table` (`ID`, `User`, `Word`, `Answer`) 
+            VALUES (NULL, '$user', '$word', '$answer')";
     $connect->query($query);
 }
 

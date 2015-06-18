@@ -104,13 +104,21 @@
 				return;
 			}
 
+			var d = new Date();
+			var y = d.getFullYear();
+			var m = d.getMonth();
+			var a = d.getDate();
+			var dateString = y + '-' + m + '-' + a;
+			$log.debug('My date string is: ' + dateString);
+
 			$http({
 				method: 'POST',
 				url: '../scripts/submit_watches.php',
 				data: $.param({
 					'user'    : $scope.userName,
 					'videos'  : videos,
-					'flashes' : flashes
+					'flashes' : flashes,
+					'date'	  : dateString
 				}),
 				headers: {'Content-Type': contentType}
 			}).
