@@ -117,7 +117,7 @@ site.config(['$routeProvider', 'localStorageServiceProvider', function($routePro
 			controller: 'VideoController'
 		})
 
-		.when('/quiz', {
+		.when('/quiz/:user', {
 			templateUrl: "pages/quiz.html", 
 			controller: 'QuizController'
 		})

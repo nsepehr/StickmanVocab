@@ -7,24 +7,51 @@
 	// Variables specific to these controllers
 	contentType = 'application/x-www-form-urlencoded';
 
-	app.controller('QuizController', ['localStorageService', '$location', '$route', '$scope', '$log', 'siteData', '$http', 'httpQuizDataService' , 'httpWatchesService',
-		function(localStorageService, $location, $route, $scope, $log, siteData, $http, httpQuizDataService, httpWatchesService) {
+	app.controller('QuizController', ['localStorageService', '$location', '$route', '$scope', '$log', 'siteData', '$http', 'httpQuizDataService' , 'httpWatchesService', '$routeParams',
+		function(localStorageService, $location, $route, $scope, $log, siteData, $http, httpQuizDataService, httpWatchesService, $routeParams) {
 
 		$scope.chosen;
 		
 		$scope.init = function() {
 			$scope.watches = [];
 			$scope.quizData = {};
-			$scope.user	   = localStorageService.get('Email')
-			$scope.chosen;
 
+			if ($routeParams.user != undefined) {
+				$scope.user = $routeParams.user;
+				$log.debug('Got the user name from URL: ' + $scope.user);
+			} else {
+				$scope.user	   = localStorageService.get('Email');
+			}
+
+			if ($scope.user == undefined || $scope.user == '') {
+				alert('Could NOT determine your user name. Please contact support');
+				$location.path('/home');
+				$route.reload();
+				return;
+			}
+
+			if (localStorageService.get($scope.user + 'QuizDone') === true) {
+				alert('You have already taken the quiz. Thanks!!');
+				$location.path('/home');
+				$route.reload();
+				return;
+			}
+
+			if (localStorageService.get($scope.user + 'QuizNum') >= 0) {
+				$log.debug('I have a quizNum set before');
+				$scope.quizNum = localStorageService.get($scope.user + 'QuizNum');
+			} else {
+				$scope.quizNum = 0;
+			}
+
+			$scope.chosen;
 			$scope.Question;
 			$scope.choiceA;
 			$scope.choiceB;
 			$scope.choiceC;
 			$scope.choiceD;
 			$scope.choiceE;
-			$scope.quizNum = 0;
+			
 			var dataPromise = httpQuizDataService.get();
 			dataPromise.then(function(result) {
 				$log.debug('In getting quiz data. My data is: %o', result.data);
@@ -51,11 +78,13 @@
 			$log.debug('Inside the next Quiz func, index is: ' + $scope.quizNum);
 			$log.debug('Chosen answer is: ' + $scope.chosen);
 			$log.debug('length of watches is: ' + $scope.watches.length);
+			localStorageService.set($scope.user + 'QuizNum', $scope.quizNum);
 			if ($scope.chosen == false) {
 				alert('Please choose an answer');
 				return;
 			}
 			if ($scope.quizNum >= $scope.watches.length){
+				localStorageService.set($scope.user + 'QuizDone', true);
 				$location.path('/thanks');
 				$route.reload();
 				return;
