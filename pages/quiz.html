@@ -20,10 +20,7 @@
 	<form method="post" name="quizAnswerForm" class="form-horizontal" ng-submit="nextQuiz()" novalidate>
 	<div class="text-center quiz container">
 		<div class="row">
-			<div class="col-sm-2">
-				<!-- <i class="pull-right fa fa-3x fa-chevron-left" id="backward-btn" ></i> -->
-			</div>
-			<div class="col-sm-8">
+			<div class="col-sm-8 col-sm-offset-2">
 				<div class="quiz-counter">{{quizNum}} out of {{watches.length}}</div>
 				<div class="card">
 					<div class="quiz-content">
@@ -40,14 +37,12 @@
 				</div>
 				<!-- It only shows up on mobile -->
 				<!-- <div ng-click="changeFlash('prev')" class="pull-left previous">Previous</div> -->
-				<div ng-click="changeFlash('next')" class="pull-right next">Next</div>
+				<!-- <div ng-click="changeFlash('next')" class="pull-right next">Next</div> -->
+				<label class="">
+				<!-- Enables the submit button when all the required fields have been validated -->
+					<input name="submit" type="submit" class="btn" value="Submit">
+				</label>
 			</div>
-				<div class="form-group">
-					<label class="col-sm-10 control-label">
-					<!-- Enables the submit button when all the required fields have been validated -->
-						<input type="submit" class="pull-right fa fa-3x fa-chevron-right" id="forward-btn">
-					</label>
-				</div>
 		</div>
 	</div>
 	</form>
