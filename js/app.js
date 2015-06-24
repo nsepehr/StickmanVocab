@@ -106,6 +106,10 @@ site.config(['$routeProvider', 'localStorageServiceProvider', function($routePro
 			controller: 'SignupFormController'
 		})
 
+		.when('/terms', {
+			templateUrl: "pages/terms.html",
+		})
+
 		.when('/guide', {
 			templateUrl: "pages/guide.html", 
 			controller: 'GuideController'

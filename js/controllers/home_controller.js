@@ -16,6 +16,7 @@
 			var name  = $scope.userName; 
 			var email = localStorageService.get('Email');
 
+			/*
 			if (name && email) {
 				$scope.showNotUser = 'true';
 				$log.debug('In home... Local storage exists');
@@ -57,6 +58,7 @@
 			} else {
 				$log.debug('No local storage');
 			}
+			*/
 		}
 
 	}]);
