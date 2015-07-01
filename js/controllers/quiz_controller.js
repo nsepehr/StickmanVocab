@@ -51,6 +51,7 @@
 			$scope.choiceC;
 			$scope.choiceD;
 			$scope.choiceE;
+			$scope.choiceF;
 			
 			var dataPromise = httpQuizDataService.get();
 			dataPromise.then(function(result) {
@@ -83,12 +84,7 @@
 				alert('Please choose an answer');
 				return;
 			}
-			if ($scope.quizNum >= $scope.watches.length){
-				localStorageService.set($scope.user + 'QuizDone', true);
-				$location.path('/thanks');
-				$route.reload();
-				return;
-			}
+
 			if ($scope.chosen != undefined) {
 				$log.debug('Answer id defined');
 				$http({
@@ -109,11 +105,20 @@
 					return;
 				});
 			}
+
+			if ($scope.quizNum >= $scope.watches.length){
+				localStorageService.set($scope.user + 'QuizDone', true);
+				$location.path('/thanks');
+				$route.reload();
+				return;
+			}
+
 			$scope.choiceA = '';
 			$scope.choiceB = '';
 			$scope.choiceC = '';
 			$scope.choiceD = '';
 			$scope.choiceE = '';
+			$scope.choiceF = '';
 			$scope.quizNum++;
 			$scope.Question = $scope.watches[$scope.quizNum-1];
 			var thisQ = {};
@@ -125,8 +130,10 @@
 					$scope.choiceC = obj.C;
 					$scope.choiceD = obj.D;
 					$scope.choiceE = obj.E;
+					$scope.choiceF = obj.F;
 				}
 			}
+			$log.debug("my E choice is : " + $scope.choiceE);
 			$scope.chosen = false;
 		}
 	}]);
