@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost:8889
--- Generation Time: May 05, 2015 at 07:00 AM
+-- Generation Time: Jun 19, 2015 at 08:34 AM
 -- Server version: 5.5.38
 -- PHP Version: 5.6.2
 
@@ -24,12 +24,12 @@ CREATE TABLE `watches` (
 `ID` int(11) NOT NULL,
   `Email` varchar(125) NOT NULL,
   `Videos` varchar(125) NOT NULL,
-  `Flashes` varchar(125) NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+  `Flashes` varchar(125) NOT NULL,
+  `Date` date NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watches`
---
 
 --
 -- Indexes for dumped tables
@@ -49,4 +49,4 @@ ALTER TABLE `watches`
 -- AUTO_INCREMENT for table `watches`
 --
 ALTER TABLE `watches`
-MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1;
+MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=0;

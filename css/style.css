@@ -185,6 +185,11 @@ footer {
 	}
 }
 
+.arrow {
+	position: absolute;
+	top: 90vh;
+}
+
 /* Home - Features */
 .features {
 	min-height: 550px;
@@ -277,7 +282,7 @@ footer {
 	border-color: #F39C12;
 	box-shadow: none;
 }
-.signup input[type="submit"] {
+.signup input[type="submit"], .quiz input[type="submit"] {
 	margin-top: 20px;
 	font-size: 1.5em;
 	color: #333333;
@@ -303,6 +308,19 @@ footer {
 .guide .btn:hover {
 	border: 2px solid #444444;
 	color: #444444;
+}
+
+.gozineha {
+	min-height: 300px;
+	padding: 0 80px;
+}
+
+.gozineha .form-control {
+	border-bottom: 1px solid #444444; 
+}
+
+.error {
+	color: red;
 }
 
 /* -------------------- Video Page -------------------- */
@@ -348,6 +366,10 @@ footer {
 	font-size: 1.4em;
 	padding: 10px;
 }
+
+.arrowButton:hover {
+	cursor: pointer;
+}
 /* -------------------- Quiz Page -------------------- */
 .quiz {
 	padding: 5%;
@@ -366,6 +388,13 @@ footer {
 }
 .quiz-question {
 	margin-bottom: 10px;
+	font-family: 'Fredericka the Great';
+	font-size: 24px;
+}
+
+.quiz-answers {
+	text-align: left;
+	padding-left: 250px;
 }
 
 

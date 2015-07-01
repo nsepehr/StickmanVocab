@@ -1,7 +1,7 @@
 // It's a good habit to wrap your javascript in a function
 (function() {
 
-	var app = angular.module('home.controller', []);
+	var app = angular.module('home.controller', ['angularSmoothscroll']);
 
 	// Used for the top level controller. Mainly cookie & localStorage
 	app.controller('HomeController', ['localStorageService', '$scope', '$log', function(localStorageService, $scope, $log){
@@ -10,11 +10,13 @@
 		$scope.startUrl = '#/signup';
 		$scope.showNotUser = 'false';
 
+
 		$scope.checkCookie = function() {
 			$scope.userName = localStorageService.get('Name');
 			var name  = $scope.userName; 
 			var email = localStorageService.get('Email');
 
+			/*
 			if (name && email) {
 				$scope.showNotUser = 'true';
 				$log.debug('In home... Local storage exists');
@@ -56,6 +58,7 @@
 			} else {
 				$log.debug('No local storage');
 			}
+			*/
 		}
 
 	}]);

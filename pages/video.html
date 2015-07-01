@@ -10,7 +10,7 @@
 					</a>
 				</div>
 				<ul class='nav navbar-nav navbar-right'>
-					<li><a class="yellow" href="#/guide">Back</a></li>
+					<!-- <li><a class="yellow" href="#/guide">Back</a></li> -->
 				</ul>
 			</div>
 		</div>
@@ -20,7 +20,7 @@
 	<div class="video text-center container-fluid" ng-init="init()">
 		<div class="row" ng-show="!showFlash">
 			<div class="col-sm-2">
-				<i class="pull-right fa fa-3x fa-chevron-left" id="backward-btn" ng-click="changeVideo('prev')" ng-show="showTitle"></i>
+				<i class="pull-right fa fa-3x fa-chevron-left arrowButton" id="backward-btn" ng-click="changeVideo('prev')" ng-show="showTitle"></i>
 			</div>
 			<div class="col-sm-8">
 				<div class="video-title" ng-show="showTitle">{{videoTitle}}</div>
@@ -39,16 +39,16 @@
 				<div ng-click="changeVideo('next')" class="pull-right next">Next</div>
 			</div>
 			<div class="col-sm-2">
-				<i class="pull-left fa fa-3x fa-chevron-right" id="forward-btn"  ng-click="changeVideo('next')" ng-show="showTitle"></i>
+				<i class="pull-left fa fa-3x fa-chevron-right arrowButton" id="forward-btn"  ng-click="changeVideo('next')" ng-show="showTitle"></i>
 			</div>
 		</div>
 		<div class="row" ng-show="showFlash">
 			<div class="col-sm-2">
-				<i class="pull-right fa fa-3x fa-chevron-left" id="backward-btn" ng-click="changeFlash('prev')" ng-show="showTitle"></i>
+				<i class="pull-right fa fa-3x fa-chevron-left arrowButton" id="backward-btn" ng-click="changeFlash('prev')" ng-show="showTitle"></i>
 			</div>
 			<div class="col-sm-8">
-				<div class="flash-title">{{flashTitle}}</div>
-				<div class="flash-counter">Flash-card {{flashIndex}} out of {{flashTotal}}</div>
+				<div class="video-title">{{flashTitle}}</div>
+				<div class="video-counter">Flash-card {{flashIndex}} out of {{flashTotal}}</div>
 				<div class="card">
 					<div class="flashcard-content">{{flashDefinition}}</div>
 				</div>
@@ -57,7 +57,7 @@
 				<div ng-click="changeFlash('next')" class="pull-right next">Next</div>
 			</div>
 			<div class="col-sm-2">
-				<i class="pull-left fa fa-3x fa-chevron-right" id="forward-btn"  ng-click="changeFlash('next')"></i>
+				<i class="pull-left fa fa-3x fa-chevron-right arrowButton" id="forward-btn"  ng-click="changeFlash('next')"></i>
 			</div>
 		</div>
 	</div>

@@ -52,7 +52,9 @@
 		//   If the user has submitted, then move to the video page
 		$scope.checkKnownWordsSubmitted = function() {
 			if ($scope.seenGuide) {
-				angular.element('#'+submitBtn).attr("value", "Back to video");
+				$location.path('/video');
+				$route.reload();
+				//angular.element('#'+submitBtn).attr("value", "Back to video");
 				// Need to get the data from known videos and checkmark the known words
 				//for (video in $scope.videoData) {
 				//	angular.element('#'+video.NAME).attr('checked', true);
@@ -104,13 +106,21 @@
 				return;
 			}
 
+			var d = new Date();
+			var y = d.getFullYear();
+			var m = d.getMonth();
+			var a = d.getDate();
+			var dateString = y + '-' + m + '-' + a;
+			$log.debug('My date string is: ' + dateString);
+
 			$http({
 				method: 'POST',
 				url: '../scripts/submit_watches.php',
 				data: $.param({
 					'user'    : $scope.userName,
 					'videos'  : videos,
-					'flashes' : flashes
+					'flashes' : flashes,
+					'date'	  : dateString
 				}),
 				headers: {'Content-Type': contentType}
 			}).

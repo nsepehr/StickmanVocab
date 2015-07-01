@@ -7,8 +7,8 @@ require_once 'login_dev.php';
 require_once 'Connect_MySQL.php'; 
 
 // Form variables
-$tableName  = 'watches';
-$fields     = array('user' ,'videos', 'flashes', 'date');
+$tableName  = 'quizes';
+//$fields     = array('user');
 
 
 ////////////////////////////////////////////////////
@@ -18,17 +18,19 @@ $fields     = array('user' ,'videos', 'flashes', 'date');
 $connect = new ConnectMySQL($db_userName, $db_password, $db_host, $db_database);
 
 // Validate the required fields
-$connect->validateFields($_POST, $fields);
+//$connect->validateFields($_GET, $fields);
 
 // Test connections to DB
 $connect->connect();
 
 // Add user using MySQL query
-addWatches($connect, $fields, $tableName);
+$data = getQuizData($connect, $tableName);
+//$videoListString = $watchListArray['Videos'];
+//$flashListString = $watchListArray['Flashes'];
 
 // Succesful :)
-echo "Successfully inserted record";
-// print_r($_POST['knownWords']);
+echo json_encode($data);
+
 exit(0);
 
 
@@ -39,20 +41,14 @@ exit(0);
 //---------------------------------------------------//
 // Add the user who filled the form to the MySQL database table
 //---------------------------------------------------//
-function addWatches($connect, $fields, $table)
+function getQuizData($connect, $table)
 {
-    $user    = $_POST[$fields[0]];
-    $videos  = $_POST[$fields[1]];
-    $flashes = $_POST[$fields[2]];
-    $date    = $_POST[$fields[3]];
+    // Built the query for grabbing the known words
+    $query = "SELECT * FROM `$table` ";
 
-    $sqlVideo = implode('/', $videos);
-    $sqlFlashes = implode('/', $flashes);
-    
-
-    $query = "INSERT INTO `$table` (`ID`, `Email`, `videos`, `flashes`, `date`) 
-            VALUES (NULL, '$user', '$sqlVideo', '$sqlFlashes', '$date')";
     $connect->query($query);
+    $results = $connect->getResultAll();
+    return $results;
 }
 
 //---------------------------------------------------//

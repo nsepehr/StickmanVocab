@@ -22,6 +22,7 @@ $connect->connect();
 
 // Grab the data for the video / flashcard page
 $result['videos']  = grab_video_url($connect, $videoTableName);
+
 $result['flashes'] = grab_flash_data($connect, $flashTableName);
 
 // echo the result back for Angular in JSON format
@@ -36,7 +37,7 @@ exit(0);
 //---------------------------------------------------//
 function grab_video_url($connect, $table) 
 {
-    $query = "SELECT `URL`,`NAME` FROM `$table`";
+    $query = "SELECT `URL`,`NAME` FROM `$table` ORDER BY NAME ASC";
     $connect->query($query);
     $result = $connect->getResultAll();
 
@@ -45,7 +46,7 @@ function grab_video_url($connect, $table)
 
 function grab_flash_data($connect, $table) 
 {
-    $query = "SELECT `NAME`,`DEFINITION` FROM `$table`";
+    $query = "SELECT `NAME`,`DEFINITION` FROM `$table` ORDER BY NAME ASC";
     $connect->query($query);
     $result = $connect->getResultAll();
 

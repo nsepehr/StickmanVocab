@@ -17,7 +17,7 @@
 		var submitBtn = "submitBtn";
 
 		if ($scope.userName = localStorageService.get('Email')) {
-			$log.debug('Got the local storage for feedback');
+			$log.debug('Got the local storage for feedback for user: ' + $scope.userName);
 		} else {
 			$log.error('Error... no localStorage');
 			$location.path('/signup');
@@ -25,10 +25,12 @@
 			return;
 		}
 
+		/*
 		if (localStorageService.get($scope.userName + 'FeedbackDone')) {
 			angular.element('#'+submitBtn).attr("disabled", true);
 			angular.element('#'+submitBtn).attr("value", "Thank You");
 		}
+		*/
 
 		$scope.setFinishedCookies = function() {
 			// Set the finished cookie anyway

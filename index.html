@@ -6,9 +6,13 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <title>S.M.V</title>
-        <meta name="description" content="S.M.V" />
         <meta name="keywords" content="" />
         <meta name="author" content="Grindstation.com" />
+        <meta property="og:url"                content="http://stickmanvocab.com" />
+		<meta property="og:type"               content="article" />
+		<meta property="og:title"              content="A better way to enhance your vocabulary!" />
+		<meta property="og:description"        content="SMV engages students and professionals in learning difficult definitions for various tests that incorporate a wide range of vocabulary terms" />
+		<meta property="og:image"              content="http://stickmanvocab.com/img/stickman-01.png" />
         
         <!-- Bootstrap -->
   		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
@@ -29,16 +33,38 @@
 				<div ng-view></div>
 			</section>
 			
-			<!-- Footer -->
+				<div id="fb-root"></div>
+				<!-- Not needed since we're working with URL sharing
+				<script>
+			      window.fbAsyncInit = function() {
+			        FB.init({
+			          appId      : '1045679442123124',
+			          xfbml      : true,
+			          version    : 'v2.3'
+			        });
+			      };
+				(function(d, s, id) {
+				 	var js, fjs = d.getElementsByTagName(s)[0];
+				 	if (d.getElementById(id)) return;
+				 	js = d.createElement(s); js.id = id;
+				 	js.src = "//connect.facebook.net/en_US/sdk.js";
+				 	fjs.parentNode.insertBefore(js, fjs);
+				}(document, 'script', 'facebook-jssdk'));</script>
+				-->
 			<footer>
 				<div class='text-center'>
 					<ul class='list-inline'>
-						<li><a href=''><i id='social-fb' class='fa fa-facebook-square fa-3x'></i></a></li>
-						<li><a href=''><i id='social-tw' class='fa fa-twitter-square fa-3x'></i></a></li>
-						<li><a href=''><i id='social-gp' class='fa fa-google-plus-square fa-3x'></i></a></li>
+						<!-- can't get this to work with custom button
+						<li><a data-href="http://stickmanvocab.com"><i id='social-fb' class='fa fa-facebook-square fa-3x'></i></a></li>
+						-->
+						<li><a href="http://www.facebook.com/sharer/sharer.php?u=http://stickmanvocab.com&title=stickmanvocab"><i id='social-fb' class='fa fa-facebook-square fa-3x'></i></a></li>
+						<!-- <li><div class="fb-share-button fa fa-facebook-square fa-3x" data-href="http://stickmanvocab.com" data-layout="icon"></div></li> -->
+						<!-- <li><a href=''><i id='social-tw' class='fa fa-twitter-square fa-3x'></i></a></li>
+						<li><a href=''><i id='social-gp' class='fa fa-google-plus-square fa-3x'></i></a></li> -->
 					</ul>
 					<h4>
-	                    <small>Copyright © 2015. StickmanVocab.com, All Rights Reserved.  <a href="#" title="Privacy Policy">Privacy Policy</a> | <a href="#" title="Terms of Use">Terms of Use</a></small>
+	                    <small>Copyright © 2015. StickmanVocab.com, All Rights Reserved.  <a href="#/terms" title="Privacy Policy">Privacy Policy</a> | <a href="#/terms" title="Terms of Use">Terms of Use</a></small>
+	                    <!-- <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count"></div> -->
 	                </h4>
 				</div>
 			</footer>
@@ -68,6 +94,9 @@
 
         <!-- Multiple select library -->
         <script src="libs/angular/select.min.js" type="text/javascript"></script>
+
+        <!-- Smooth scroll -->
+        <script src="libs/angular/bb15da28.scripts.js" type="text/javascript"></script>
 
   		<!-- Angular Controller files -->
   		<!-- <script src="js/controllers.js" type="text/javascript"></script> -->

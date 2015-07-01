@@ -17,23 +17,26 @@
 		<div class="container-fluid">
 			<form method="post" name="unknownVideoForm" ng-submit="submitWatches()" novalidate>
 			<div class="row">
-				<div class="col-sm-6">
+				<div class="col-sm-6 col-sm-offset-3 text-center">
 					<h1>Instruction</h1>
-					<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam volutpat a justo ut ultricies. Suspendisse suscipit luctus mauris, eu bibendum tortor lacinia non. Ut porttitor risus et augue aliquet gravida. Nullam tincidunt dui at arcu tempor rutrum. Cras vel orci sit amet dui condimentum laoreet id at nisi. Fusce sed tempus orci. Cras consequat ultrices mi, nec tempor urna consectetur non. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam eu ligula leo. Vivamus vulputate tellus at est gravida, sed mattis nibh sagittis. Vivamus et ex in ligula imperdiet vehicula sed eget sem.</p>
+					<p> Please choose 7 vocabulary words that you’re not familiar with from each of the two word banks below.</p> 
+
+<p>The word list on the left will follow the process of mnemonics whereas the word list on the right follow the process of reading and memorizing the words. 
+</p>
 				</div>
 			</div>
-			<div class="row">
-					<div class="col-sm-6">
+			<div class="row text-center">
+					<div class="col-sm-6 gozineha">
 						<h3>Please select {{mustSelectNum}} words from this list</h3>
-						<p ng-show="vidSelect.selected.length > mustSelectNum">You have selected more than {{mustSelectNum}} words</p>
-						<div class="row">
+						<p class="error" ng-show="vidSelect.selected.length > mustSelectNum">You have selected more than {{mustSelectNum}} words</p>
+						<div>
 								<!-- OLD checkbox model
 								<div class="col-sm-4" ng-repeat="video in videoData">
 									<input type="checkbox" id="{{video.NAME}}" checklist-model="words.video" checklist-value="video.NAME">
 									<label>{{video.NAME}}</label>
 								</div>
 								-->
-								<ui-select multiple ng-model="vidSelect.selected">
+								<ui-select class="gozinehboarder" multiple ng-model="vidSelect.selected">
 									<ui-select-match placeholder="Select your word...">{{$item.NAME}}</ui-select-match>
 									<ui-select-choices repeat="video in videoData | filter: $select.search">
 										<div ng-bind-html="video.NAME | highlight: $select.search"></div>
@@ -41,9 +44,9 @@
 								</ui-select>
 						</div>
 					</div>
-					<div class="col-sm-6">
+					<div class="col-sm-6 gozineha">
 						<h3>Please select another {{mustSelectNum}} words from this list</h3>
-						<p ng-show="flashSelect.selected.length > mustSelectNum">You have selected more than {{mustSelectNum}} words</p>
+						<p class="error" ng-show="flashSelect.selected.length > mustSelectNum">You have selected more than {{mustSelectNum}} words</p>
 						<div class="row">
 								<ui-select multiple ng-model="flashSelect.selected">
 									<ui-select-match placeholder="Select your word...">{{$item.NAME}}</ui-select-match>
@@ -53,9 +56,9 @@
 								</ui-select>
 						</div>
 					</div>
-					<div class="row text-center"><input name="submitBtn" id="submitBtn" type="submit" value="Continue" class="row text-center btn" 
-						ng-disabled="vidSelect.selected.length != mustSelectNum || flashSelect.selected.length != mustSelectNum"></div>
 			</div>
+			<div class="row text-center"><input name="submitBtn" id="submitBtn" type="submit" value="Continue" class="row text-center btn" 
+						ng-disabled="vidSelect.selected.length != mustSelectNum || flashSelect.selected.length != mustSelectNum"></div>
 			</form>
 			<!-- ui-select working example
 			<div class="row">
@@ -71,4 +74,5 @@
 				<!-- <div class="row text-center"><a class="btn" href="#/video">Start Now</a></div> -->
 		</div>
 	</div>
+
 </div>
