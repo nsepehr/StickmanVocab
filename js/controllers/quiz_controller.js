@@ -11,6 +11,7 @@
 		function(localStorageService, $location, $route, $scope, $log, siteData, $http, httpQuizDataService, httpWatchesService, $routeParams) {
 
 		$scope.chosen;
+
 		
 		$scope.init = function() {
 			$scope.watches = [];
@@ -19,9 +20,11 @@
 			if ($routeParams.user != undefined) {
 				$scope.user = $routeParams.user;
 				$log.debug('Got the user name from URL: ' + $scope.user);
+				localStorageService.set('Email', $scope.user); // Set so it doesn't show the contact message
 			} else {
 				$scope.user	   = localStorageService.get('Email');
 			}
+
 
 			if ($scope.user == undefined || $scope.user == '') {
 				alert('Could NOT determine your user name. Please contact support');
@@ -29,6 +32,8 @@
 				$route.reload();
 				return;
 			}
+
+			localStorageService.set($scope.user + 'noShowContact', true); // Set so it doesn't show the contact message
 
 			if (localStorageService.get($scope.user + 'QuizDone') === true) {
 				alert('You have already taken the quiz. Thanks!!');

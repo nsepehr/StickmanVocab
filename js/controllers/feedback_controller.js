@@ -9,6 +9,7 @@
 	app.controller('FeedbackController', ['$scope', '$http', '$log', 'localStorageService', '$location', '$route', 
 		function($scope, $http, $log, localStorageService, $location, $route) {
 		$scope.videoData;
+		$scope.showContact = true;
 		this.textArea;
 
 		$scope.videos = {
@@ -25,12 +26,10 @@
 			return;
 		}
 
-		/*
-		if (localStorageService.get($scope.userName + 'FeedbackDone')) {
-			angular.element('#'+submitBtn).attr("disabled", true);
-			angular.element('#'+submitBtn).attr("value", "Thank You");
+		if (localStorageService.get($scope.userName + 'noShowContact')) {
+			$log.debug('Not showing contact');
+			$scope.showContact = false;
 		}
-		*/
 
 		$scope.setFinishedCookies = function() {
 			// Set the finished cookie anyway
