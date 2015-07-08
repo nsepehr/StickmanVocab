@@ -24,7 +24,7 @@
 			</div>
 			<div class="col-sm-8">
 				<div class="video-title" ng-show="showTitle">{{videoTitle}}</div>
-				<div class="video-counter" ng-show="showTitle">Video {{videoIndex}} out of {{videoTotal}}</div>
+				<div class="video-counter" ng-show="showTitle">Video {{videoIndex}} out of {{videoTotal + flashTotal}}</div>
 				<div>
 					<video controls id="video-id">
 						<source src="" type="video/mp4" id="web-vid-src">
@@ -48,7 +48,7 @@
 			</div>
 			<div class="col-sm-8">
 				<div class="video-title">{{flashTitle}}</div>
-				<div class="video-counter">Flash-card {{flashIndex}} out of {{flashTotal}}</div>
+				<div class="video-counter">Flash-card {{flashIndex}} out of {{flashTotal + videoTotal}}</div>
 				<div class="card">
 					<div class="flashcard-content">{{flashDefinition}}</div>
 				</div>

@@ -19,10 +19,9 @@
 			<div class="row">
 				<div class="col-sm-6 col-sm-offset-3 text-center">
 					<h1>Instruction</h1>
-					<p> Please choose 7 vocabulary words that you’re not familiar with from each of the two word banks below.</p> 
-
-<p>The word list on the left will follow the process of mnemonics whereas the word list on the right follow the process of reading and memorizing the words. 
-</p>
+					<p>Please choose 7 vocabulary words that you’re not familiar with from each of the two word banks below.</p> 
+					<p>In next section you will Learn the words. <b>We will contact you within a week</b> with a little quiz to see how much of it you remember.</P> 
+					<p>The word list on the left will follow the process of mnemonics whereas the word list on the right follow the traditional process of reading and memorizing (flash cards) the words. </p>
 				</div>
 			</div>
 			<div class="row text-center">
@@ -37,7 +36,7 @@
 								</div>
 								-->
 								<ui-select class="gozinehboarder" multiple ng-model="vidSelect.selected">
-									<ui-select-match placeholder="Select your word...">{{$item.NAME}}</ui-select-match>
+									<ui-select-match placeholder="Click here">{{$item.NAME}}</ui-select-match>
 									<ui-select-choices repeat="video in videoData | filter: $select.search">
 										<div ng-bind-html="video.NAME | highlight: $select.search"></div>
 									</ui-select-choices>
@@ -49,7 +48,7 @@
 						<p class="error" ng-show="flashSelect.selected.length > mustSelectNum">You have selected more than {{mustSelectNum}} words</p>
 						<div class="row">
 								<ui-select multiple ng-model="flashSelect.selected">
-									<ui-select-match placeholder="Select your word...">{{$item.NAME}}</ui-select-match>
+									<ui-select-match placeholder="Click here">{{$item.NAME}}</ui-select-match>
 									<ui-select-choices repeat="flash in flashData | filter: $select.search">
 										<div ng-bind-html="flash.NAME | highlight: $select.search"></div>
 									</ui-select-choices>
